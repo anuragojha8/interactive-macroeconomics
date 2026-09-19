@@ -1,0 +1,42 @@
+{
+  "name": "interactive-macroeconomics",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:cov": "vitest run --coverage",
+    "typecheck": "tsc -b --noEmit",
+    "lint": "eslint src tests",
+    "play": "vite-node scripts/explore.ts --",
+    "lint:prose": "vite-node scripts/lint-prose.ts",
+    "test:e2e": "playwright test",
+    "verify": "npm run typecheck && npm run lint:prose && npm run test:cov && npm run build && npm run check:budget && npm run test:e2e",
+    "check:budget": "vite-node scripts/check-budget.ts"
+  },
+  "dependencies": {
+    "d3-scale": "^4.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "@types/d3-scale": "^4.0.8",
+    "@types/node": "^26.5.0",
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "@vitest/coverage-v8": "^2.1.2",
+    "fast-check": "^3.22.0",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
+    "vitest": "^2.1.2"
+  }
+}

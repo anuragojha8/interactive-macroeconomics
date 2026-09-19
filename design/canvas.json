@@ -1,0 +1,15 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 1400, "title": "Chapter page — model stage" },
+    { "file": "AltDense.dc.html", "x": 1560, "y": 0, "w": 1100, "h": 1280, "title": "Alternate — model first" },
+    { "file": "Trace.dc.html", "x": 0, "y": 1560, "w": 720, "h": 1180, "title": "Causal trace" },
+    { "file": "Predict.dc.html", "x": 800, "y": 1560, "w": 720, "h": 780, "title": "Predict gate", "is_interactive": true },
+    { "file": "Charts.dc.html", "x": 1600, "y": 1560, "w": 1100, "h": 840, "title": "Steady state" }
+  ],
+  "annotations": [
+    { "id": "direction", "x": 0, "y": -180, "w": 620, "text": "Direction: technical editorial.\nWarm paper, Newsreader for prose, IBM Plex Mono for anything numeric.\nThe palette carries the pedagogy: blue = accounting (not arguable), amber = assumption (arguable), green = accumulation." },
+    { "id": "alternate", "x": 1560, "y": -180, "w": 560, "text": "Low-fi alternate on a different axis: model-first, dark, notebook-like.\nDenser and more instrument-like; worse for 28 minutes of reading.\nHere to compare against, not to ship." },
+    { "id": "predict-note", "x": 800, "y": 2390, "w": 720, "text": "This one has working controls — pick a direction for all three and the Run button unlocks, then it reveals what actually happened. Everything else is a static mockup." }
+  ],
+  "launch": { "view": "canvas" }
+}

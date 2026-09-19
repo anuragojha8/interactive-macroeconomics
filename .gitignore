@@ -1,0 +1,20 @@
+# Dependencies and build output
+node_modules
+dist
+*.tsbuildinfo
+
+# Test and coverage output
+coverage
+test-results
+playwright-report
+blob-report
+
+# The seeded design canvas is a ~2.5 MB generated file, mostly the editor
+# payload. Its sources are design/*.dc.html; the published canvas is canonical.
+interactive-macroeconomics-reading-surface.html
+
+# Local and OS noise
+.DS_Store
+*.local
+.env
+.env.*

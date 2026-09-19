@@ -1,0 +1,188 @@
+.viz {
+  margin: 0;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--panel);
+  padding: var(--sp-4) var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.viz__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/*
+ * The title is the label on the figure and the subtitle is the reading of it.
+ * They were set the other way round: a 13px title under a 14px subtitle.
+ */
+.viz__title {
+  font-size: var(--t-4);
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.viz__sub {
+  font-size: var(--t-4);
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.viz__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  margin-top: -2px;
+}
+
+.viz__key {
+  font-family: var(--mono);
+  font-size: var(--t-2);
+  color: var(--ink-soft);
+}
+
+.viz__key::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+  margin-right: 7px;
+  vertical-align: middle;
+}
+
+.viz__key--in::before {
+  background: var(--accounting);
+}
+
+.viz__key--out::before {
+  background: var(--assumption);
+}
+
+.viz svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.viz__grid {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.viz__axis {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+
+.viz__tick {
+  font-size: 10px;
+  fill: var(--ink-faint);
+}
+
+.viz__axislabel {
+  font-size: 10px;
+  fill: var(--ink-faint);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.viz__line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.viz__line--in {
+  stroke: var(--accounting);
+}
+.viz__line--out {
+  stroke: var(--assumption);
+}
+.viz__line--stock {
+  stroke: var(--accumulation);
+}
+
+.viz__drop {
+  stroke: var(--accumulation);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.viz__crosshair {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-opacity: 0.28;
+}
+
+.viz__halo {
+  fill: none;
+  stroke: var(--panel);
+  stroke-width: 3;
+}
+
+.viz__dot {
+  fill: var(--accumulation);
+}
+
+/*
+ * Annotations sit on top of the marks they annotate. Knocking the panel colour
+ * out behind the glyphs is what keeps a readout legible where it crosses a line.
+ */
+.viz__note {
+  font-size: 11px;
+  fill: var(--accumulation);
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: var(--panel);
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+}
+
+.viz__note--soft {
+  fill: var(--ink-soft);
+  font-weight: 400;
+  font-size: 10px;
+}
+
+.viz__none {
+  font-size: 12px;
+  fill: var(--fail);
+}
+
+/*
+ * Small multiples. Three charts across a reading column give each about 150px,
+ * at which a 460-unit plot renders its axis labels at under four pixels. The
+ * compact figure drops the chrome instead of shrinking it: the numbers move up
+ * into the caption, where they are set in HTML at a size a reader can see, and
+ * the drawing keeps only the shape that is being compared.
+ */
+.viz--compact {
+  padding: var(--sp-3) var(--sp-4);
+  gap: var(--sp-2);
+}
+
+.viz--compact .viz__title {
+  font-size: var(--t-4);
+}
+
+.viz--compact .viz__sub {
+  font-size: var(--t-2);
+  line-height: 1.4;
+}
+
+.viz--compact .viz__line {
+  stroke-width: 3;
+}
+
+.viz--compact .viz__baseline {
+  stroke: var(--rule-strong);
+  stroke-width: 1.5;
+}
+
+.viz--compact .viz__band {
+  fill: var(--rule);
+  opacity: 0.55;
+}

@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #FBFAF7; color: #23201B;
+           font-family: Newsreader, Georgia, serif; }
+    a { color: #2F5FA8; text-decoration: none; border-bottom: 1px solid #C3D0E6; }
+    a:hover { color: #1E4478; }
+    * { box-sizing: border-box; }
+    .opt { cursor: pointer; user-select: none; }
+  </style>
+</helmet>
+
+<div style="width: 720px; min-height: 640px; background: #FBFAF7; padding: 28px 30px; display: flex; flex-direction: column; gap: 18px;">
+
+  <div style="display: flex; flex-direction: column; gap: 6px;">
+    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #A8702F;">Predict before you run</span>
+    <h2 style="margin: 0; font-size: 25px; font-weight: 500; letter-spacing: -0.01em; text-wrap: pretty;">The country raises its investment rate from 20% to 30%.</h2>
+    <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #5C564C;">Commit to a direction for each. The model will not run until you do &mdash; guessing after the fact teaches nothing.</p>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <sc-for list="{{questions}}" as="q" hint-placeholder-count="3">
+      <div style="border: 1px solid {{q.border}}; border-radius: 4px; background: {{q.bg}}; padding: 13px 15px; display: flex; align-items: center; gap: 14px;">
+        <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600;">{{q.symbol}}</span>
+          <span style="font-size: 15px; color: #5C564C;">{{q.label}}</span>
+        </div>
+        <sc-if value="{{q.revealed}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5C564C;">{{q.actualText}}</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 4px 9px; border-radius: 3px; background: {{q.verdictBg}}; color: {{q.verdictFg}};">{{q.verdictText}}</span>
+          </div>
+        </sc-if>
+        <div style="display: flex; gap: 5px;">
+          <sc-for list="{{q.options}}" as="opt" hint-placeholder-count="3">
+            <span class="opt" onClick="{{opt.pick}}" style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; width: 44px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 3px; background: {{opt.bg}}; color: {{opt.fg}}; border: 1px solid {{opt.border}};">{{opt.glyph}}</span>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 14px; padding-top: 4px;">
+    <span onClick="{{run}}" style="cursor: pointer; user-select: none; font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 11px 20px; border-radius: 3px; background: {{runBg}}; color: {{runFg}}; border: 1px solid {{runBorder}};">{{runLabel}}</span>
+    <span style="font-size: 15px; color: #8A8378;">{{hint}}</span>
+  </div>
+
+  <div style="height: 1px; background: #E3DFD6;"></div>
+
+  <div style="display: flex; flex-direction: column; gap: 9px;">
+    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8A8378;">Your calling record</span>
+    <div style="display: flex; align-items: baseline; gap: 12px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 27px; font-weight: 600;">7</span>
+      <span style="font-size: 16px; color: #5C564C;">of 11 predictions correct so far</span>
+    </div>
+    <div style="display: flex; gap: 4px;">
+      <span style="width: 26px; height: 7px; border-radius: 2px; background: #2F7D5E;"></span>
+      <span style="width: 26px; height: 7px; border-radius: 2px; background: #2F7D5E;"></span>
+      <span style="width: 26px; height: 7px; border-radius: 2px; background: #C4453A;"></span>
+      <span style="width: 26px; height: 7px; border-radius: 2px; background: #2F7D5E;"></span>
+      <span style="width: 26px; height: 7px; border-radius: 2px; background: #2F7D5E;"></span>
+      <span style="width: 26px; height: 7px; border-radius: 2px; background: #C4453A;"></span>
+      <span style="width: 26px; height: 7px; border-radius: 2px; background: #2F7D5E;"></span>
+      <span style="width: 26px; height: 7px; border-radius: 2px; background: #2F7D5E;"></span>
+      <span style="width: 26px; height: 7px; border-radius: 2px; background: #C4453A;"></span>
+      <span style="width: 26px; height: 7px; border-radius: 2px; background: #C4453A;"></span>
+      <span style="width: 26px; height: 7px; border-radius: 2px; background: #2F7D5E;"></span>
+    </div>
+    <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #5C564C;">You are reliable on flows and consistently wrong about timing &mdash; four of your five misses were about <em>when</em> something moves, not which way.</p>
+  </div>
+
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":720,"height":640}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picks: {}, revealed: false };
+  }
+
+  renderVals() {
+    const TRUTH = { Y: 'none', C: 'down', Knext: 'up' };
+    const ACTUAL = {
+      Y: '1,000.00 unchanged',
+      C: '800.00 → 700.00',
+      Knext: '1,000.00 → 1,200.00',
+    };
+    const GLYPH = { up: '↑', none: '–', down: '↓' };
+    const spec = [
+      { id: 'Y', symbol: 'Y', label: 'Output, this year' },
+      { id: 'C', symbol: 'C', label: 'Consumption, this year' },
+      { id: 'Knext', symbol: 'Kₜ₊₁', label: 'Capital, next year' },
+    ];
+
+    const picks = this.state.picks;
+    const revealed = this.state.revealed;
+    const answered = spec.filter((q) => picks[q.id]).length;
+    const ready = answered === spec.length;
+
+    const questions = spec.map((q) => {
+      const picked = picks[q.id];
+      const correct = revealed && picked === TRUTH[q.id];
+      return {
+        symbol: q.symbol,
+        label: q.label,
+        revealed: revealed,
+        actualText: ACTUAL[q.id],
+        verdictText: correct ? 'called it' : 'missed',
+        verdictBg: correct ? '#E8F3EE' : '#F7E8E6',
+        verdictFg: correct ? '#2F7D5E' : '#A8382F',
+        bg: revealed ? (correct ? '#F4F9F6' : '#FDF6F5') : '#F5F3EE',
+        border: revealed ? (correct ? '#BFDDCF' : '#E8C9C4') : '#E3DFD6',
+        options: ['up', 'none', 'down'].map((dir) => {
+          const on = picked === dir;
+          return {
+            glyph: GLYPH[dir],
+            bg: on ? '#23201B' : '#FBFAF7',
+            fg: on ? '#FBFAF7' : '#8A8378',
+            border: on ? '#23201B' : '#DFDACF',
+            pick: () => {
+              if (this.state.revealed) return;
+              this.setState({ picks: Object.assign({}, this.state.picks, { [q.id]: dir }) });
+            },
+          };
+        }),
+      };
+    });
+
+    return {
+      questions: questions,
+      runLabel: revealed ? 'see the trace →' : 'run the model',
+      runBg: revealed ? '#2F5FA8' : ready ? '#23201B' : '#EFEDE7',
+      runFg: revealed || ready ? '#FBFAF7' : '#A8A296',
+      runBorder: revealed ? '#2F5FA8' : ready ? '#23201B' : '#DFDACF',
+      hint: revealed
+        ? 'Output never moved. Most people predict that it rises.'
+        : ready
+          ? 'Locked in. Once it runs you cannot change these.'
+          : answered + ' of 3 committed',
+      run: () => {
+        if (!ready) return;
+        this.setState({ revealed: true });
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

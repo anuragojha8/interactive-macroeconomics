@@ -1,0 +1,452 @@
+.stage {
+  position: sticky;
+  top: 24px;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+
+.stage__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--rule);
+}
+
+.stage__id {
+  font-size: var(--t-4);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.stage__ext,
+.stage__t {
+  font-size: var(--t-1);
+  color: var(--ink-faint);
+}
+
+.stage__block {
+  padding: var(--sp-4) var(--sp-5) var(--sp-5);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.stage__block:last-child {
+  border-bottom: none;
+}
+
+/* The eyebrow labels the block below it, so it sits close to it. */
+.stage__block > .eyebrow,
+.stage__blockhead {
+  margin-bottom: -2px;
+}
+
+.stage__blockhead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.control__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+
+.control__name {
+  font-size: var(--t-3);
+}
+
+.control__label {
+  color: var(--ink-faint);
+}
+
+.control__value {
+  font-size: var(--t-4);
+  font-weight: 600;
+}
+
+/*
+ * Four fixed columns: symbol, figure, unit, kind. Fixed, because a table whose
+ * columns move when a number gains a digit cannot be read down.
+ */
+.values {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.values th {
+  font-weight: 400;
+  font-size: var(--t-4);
+  text-align: left;
+  padding: 3px 0;
+  width: 58px;
+}
+
+.values td {
+  font-size: var(--t-2);
+  color: var(--ink-faint);
+  padding: 3px 0;
+}
+
+.values__num {
+  font-size: var(--t-4) !important;
+  color: var(--ink) !important;
+  text-align: right;
+  padding-right: var(--sp-3) !important;
+}
+
+.values__unit {
+  width: 106px;
+}
+
+.values__kind {
+  width: 56px;
+  text-align: right;
+}
+
+.values__kind--stock {
+  color: var(--accumulation) !important;
+}
+
+.values__kind--flow {
+  color: var(--accounting) !important;
+}
+
+.invariants,
+.relations,
+.diagnostics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+/*
+ * Tick, claim, verdict — three columns, so the verdicts line up and a failure
+ * is found by scanning one edge rather than reading every row.
+ */
+.invariants li {
+  display: grid;
+  grid-template-columns: 13px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--sp-2);
+  font-size: var(--t-5);
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.invariants li.ok > span:first-child {
+  color: var(--accumulation);
+}
+
+.invariants li.bad {
+  color: var(--fail);
+}
+
+.invariants li.bad > span:first-child {
+  color: var(--fail);
+}
+
+.invariants__detail {
+  font-size: var(--t-2);
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.invariants li.bad .invariants__detail {
+  color: var(--fail);
+}
+
+/*
+ * Kind on the left, equation in the middle, the code toggle parked on the right
+ * edge. Fifteen relations each carrying a bordered button on its own line was a
+ * wall of buttons with equations hidden in it.
+ */
+.relations {
+  gap: var(--sp-1);
+}
+
+.relations__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: var(--sp-3);
+  padding: 3px 0;
+}
+
+.relations__line {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+
+.relations__kind {
+  width: 88px;
+  flex-shrink: 0;
+  font-size: var(--t-1);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/*
+ * The equation and its flag are one run of text, so an equation too long for a
+ * 350px panel wraps and takes its flag with it instead of leaving it stranded
+ * on the first line.
+ */
+.relations__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  line-height: 1.5;
+}
+
+.relations__kind--accounting {
+  color: var(--accounting);
+}
+.relations__kind--assumption {
+  color: var(--assumption);
+}
+.relations__kind--accumulation {
+  color: var(--accumulation);
+}
+
+/*
+ * The panel is 350px wide and two of the relations do not fit on one line of
+ * it. A long one wraps inside its own column rather than running under the
+ * toggle beside it.
+ */
+.relations__eq {
+  font-size: var(--t-4);
+}
+
+.relations__eq .math {
+  white-space: normal;
+}
+
+.relations__flag {
+  margin-left: 6px;
+  font-size: var(--t-2);
+  color: var(--assumption);
+  border-bottom: 1px dotted var(--assumption);
+  cursor: help;
+}
+
+.relations__item > .reveal {
+  gap: var(--sp-2);
+}
+
+.relations__item .reveal__toggle {
+  font-size: var(--t-1);
+  padding: 2px 0;
+  border: none;
+  background: none;
+  color: var(--ink-faint);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 3px;
+}
+
+.relations__item .reveal__toggle:hover {
+  color: var(--ink);
+  text-decoration-color: var(--ink);
+}
+
+/* Opened, the code is no longer a marginal note: it takes the whole row. */
+.relations__item:has(.reveal--open) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.relations__item .reveal--open {
+  padding-top: var(--sp-1);
+}
+
+.relations__item .reveal--open .reveal__toggle {
+  align-self: flex-start;
+}
+
+/* Three keys, three lines: a legend that wraps two-and-one is a ragged edge. */
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: var(--sp-3);
+  margin-top: var(--sp-1);
+  border-top: 1px solid var(--rule);
+}
+
+.legend__item {
+  font-family: var(--mono);
+  font-size: var(--t-2);
+}
+
+.legend__item::before {
+  content: '■ ';
+}
+
+.legend__item--accounting {
+  color: var(--accounting);
+}
+.legend__item--assumption {
+  color: var(--assumption);
+}
+.legend__item--accumulation {
+  color: var(--accumulation);
+}
+
+.loop {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.loop__path {
+  font-size: var(--t-4);
+}
+
+.loop__tag {
+  font-size: var(--t-3);
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+
+.loop__tag--stabilizing {
+  background: var(--accumulation-bg);
+  color: var(--accumulation);
+}
+
+.loop__tag--amplifying {
+  background: var(--fail-bg);
+  color: var(--fail);
+}
+
+.loop__gain {
+  font-size: var(--t-3);
+  color: var(--ink-faint);
+}
+
+.diagnostics li {
+  font-size: var(--t-5);
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.diagnostics--error {
+  color: var(--fail);
+}
+
+.diagnostics--warning {
+  color: var(--assumption);
+}
+
+.reconcile {
+  border: 1px solid var(--fail);
+  border-radius: 5px;
+  background: var(--fail-bg);
+  padding: var(--sp-4) var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.reconcile--ok {
+  border-color: var(--rule);
+  background: var(--panel);
+}
+
+.reconcile--ok p {
+  margin: 0;
+  font-size: var(--t-6) !important;
+  line-height: var(--lh-snug) !important;
+  color: var(--ink-soft);
+}
+
+.reconcile__problem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.reconcile__head {
+  color: var(--fail);
+}
+
+.reconcile__values {
+  margin: 0;
+  font-size: var(--t-5) !important;
+  color: var(--fail);
+}
+
+.reconcile__why {
+  margin: 0;
+  font-size: var(--t-5) !important;
+  line-height: var(--lh-snug) !important;
+  color: var(--ink-soft);
+}
+
+.reconcile__options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.reconcile__options button {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  font-family: var(--mono);
+  font-size: var(--t-3);
+  padding: 7px 11px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.reconcile__options button:hover {
+  border-color: var(--ink);
+}
+
+.reconcile__move {
+  color: var(--ink-faint);
+}
+
+.reconcile__total {
+  margin: 0;
+  font-size: var(--t-2) !important;
+  color: var(--ink-faint);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sp-3) var(--sp-6);
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--panel);
+  padding: var(--sp-4) var(--sp-5);
+}

@@ -1,0 +1,164 @@
+.trace {
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--paper);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.trace__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.trace__title {
+  margin: 0;
+  font-size: var(--t-5);
+  font-weight: 600;
+}
+
+.trace__empty {
+  font-size: var(--t-5) !important;
+  color: var(--ink-faint);
+}
+
+.trace__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  counter-reset: step;
+}
+
+.step {
+  border: 1px solid var(--rule);
+  border-left-width: 3px;
+  border-radius: 4px;
+  padding: var(--sp-3) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+/*
+ * The tint is warm, like the paper. A cool grey card on warm stock reads as a
+ * printing error rather than as a category.
+ */
+.step--accounting {
+  border-left-color: var(--accounting);
+  background: var(--accounting-tint);
+}
+.step--assumption {
+  border-left-color: var(--assumption);
+  background: var(--assumption-tint);
+}
+.step--accumulation {
+  border-left-color: var(--accumulation);
+  background: var(--accumulation-tint);
+}
+
+.step__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.step__target {
+  font-size: var(--t-5);
+  font-weight: 600;
+}
+
+.step__values {
+  font-size: var(--t-4);
+  color: var(--ink-soft);
+}
+
+.step__pct {
+  font-size: var(--t-3);
+}
+
+.step__pct--up {
+  color: var(--accumulation);
+}
+.step__pct--down {
+  color: var(--fail);
+}
+
+.step__primitive {
+  margin-left: auto;
+  font-size: var(--t-1);
+  padding: 3px 7px;
+  border-radius: 3px;
+}
+
+.step__primitive--accounting {
+  background: var(--accounting-bg);
+  color: var(--accounting);
+}
+.step__primitive--assumption {
+  background: var(--assumption-bg);
+  color: var(--assumption);
+}
+.step__primitive--accumulation {
+  background: var(--accumulation-bg);
+  color: var(--accumulation);
+}
+
+.step__because {
+  margin: 0;
+  font-size: var(--t-5) !important;
+  line-height: var(--lh-snug) !important;
+  color: var(--ink-soft);
+}
+
+/* The working behind the claim, set apart from the claim by a hairline. */
+.step__inputs {
+  margin: 2px 0 0;
+  padding-top: var(--sp-1);
+  border-top: 1px solid var(--rule);
+  font-size: var(--t-2) !important;
+  color: var(--ink-faint);
+}
+
+.unchanged {
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: var(--panel-sunk);
+  padding: var(--sp-3) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.unchanged__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+
+.unchanged__count {
+  font-size: var(--t-1);
+  color: var(--ink-faint);
+}
+
+.unchanged__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+}
+
+.chip {
+  font-size: var(--t-3);
+  padding: 3px 9px;
+  border-radius: 3px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+}

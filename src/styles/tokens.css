@@ -1,0 +1,125 @@
+/*
+ * The palette carries the pedagogy: blue is accounting (not arguable), amber is
+ * an assumption (arguable), green is accumulation. A reader scanning the
+ * relation list sees which claims are contestable before reading a word.
+ */
+:root {
+  --paper: #fbfaf7;
+  --panel: #f5f3ee;
+  --panel-sunk: #f2f0ea;
+  --ink: #23201b;
+  --ink-soft: #5c564c;
+  --ink-faint: #6a655c;
+  --rule: #e3dfd6;
+  --rule-strong: #c9c3b6;
+
+  --accounting: #2f5fa8;
+  --accounting-bg: #eaf0f9;
+  --accounting-tint: #f2f6fc;
+  --assumption: #8f5e27;
+  --assumption-bg: #f9f1e7;
+  --assumption-tint: #fbf4ea;
+  --accumulation: #2c7658;
+  --accumulation-bg: #e8f3ee;
+  --accumulation-tint: #edf5f1;
+  --fail: #a8382f;
+  --fail-bg: #f7e8e6;
+
+  --serif: Newsreader, Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --measure: 66ch;
+
+  /*
+   * One type ramp for the whole book. Every font-size in every component file
+   * is one of these eleven steps; nothing is set off the ramp. The steps run
+   * about 1.1 apart in the panel range, where a half-step is the difference
+   * between a number and its unit, and open out at the top where headings have
+   * to separate from body copy across a column of dense figures.
+   */
+  --t-1: 10px; /* eyebrows, chart ticks, verdict chips */
+  --t-2: 11px; /* fine print inside a panel */
+  --t-3: 12px; /* secondary mono data, control labels */
+  --t-4: 13px; /* primary mono data: values, equations, symbols */
+  --t-5: 15px; /* captions, list prose, panel prose */
+  --t-6: 17px; /* secondary prose: cases, notes, exercise rows */
+  --t-7: 18px; /* body */
+  --t-8: 20px; /* lede, callout, display equation, chapter nav */
+  --t-9: 23px; /* block title: a case, a contents entry */
+  --t-10: 27px; /* section heading */
+  --t-11: 40px; /* chapter title */
+
+  /* A 4px grid. Gaps and padding come from here, not from taste. */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 22px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 72px;
+
+  --lh-tight: 1.2;
+  --lh-snug: 1.5;
+  --lh-body: 1.72;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Every block in the book announces what kind of thing it is in the same place,
+ * at the same size, in the same colour. The eyebrow is the only signpost inside
+ * a dense panel, so it is set dark enough to be read rather than sensed.
+ */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: var(--t-1);
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+.math {
+  font-family: var(--mono);
+  white-space: nowrap;
+}
+
+.math sub,
+.math sup {
+  font-size: 0.68em;
+  line-height: 0;
+}
+
+.math-frac {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.math-slash {
+  padding: 0 1px;
+  color: var(--ink-faint);
+}

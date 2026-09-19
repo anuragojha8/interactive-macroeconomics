@@ -1,0 +1,304 @@
+.book {
+  min-height: 100vh;
+  background: var(--paper);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 58px;
+  padding: 0 var(--sp-7);
+  border-bottom: 1px solid var(--rule);
+}
+
+.topbar__brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+}
+
+.topbar__title {
+  font-size: var(--t-3);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.topbar__tag,
+.topbar__note {
+  font-size: var(--t-2);
+  color: var(--ink-faint);
+}
+
+.prose {
+  max-width: var(--measure);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.prose h1 {
+  margin: 0;
+  font-size: var(--t-11);
+  line-height: 1.14;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+
+/*
+ * The eyebrow and the title are one object, so they sit at a fraction of the
+ * distance that separates them from the paragraph below.
+ */
+.prose > .eyebrow {
+  margin-bottom: -14px;
+}
+
+.prose p {
+  margin: 0;
+  font-size: var(--t-7);
+  line-height: var(--lh-body);
+  text-wrap: pretty;
+}
+
+.prose .lede {
+  font-size: var(--t-8);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/*
+ * A heading belongs to the text beneath it, not to the text above. Four times
+ * as much air above as below is what says so without a rule or a colour.
+ */
+.prose h2 {
+  margin: var(--sp-5) 0 -12px;
+  font-size: var(--t-10);
+  line-height: var(--lh-tight);
+  font-weight: 500;
+  letter-spacing: -0.012em;
+}
+
+/*
+ * Anything with a border around it is a different kind of object from a
+ * paragraph, and gets a wider berth than one paragraph gets from the next.
+ */
+.prose
+  > :is(
+    .viz,
+    .charts,
+    .predict,
+    .sorter,
+    .trace,
+    .equation,
+    .case,
+    .breakit,
+    .controls,
+    .reconcile,
+    .callout,
+    .boundary
+  ) {
+  margin-block: 10px;
+}
+
+.result {
+  font-size: 0.92em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+}
+
+.equation {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--panel);
+  padding: var(--sp-5) var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.equation__kind {
+  color: var(--accumulation);
+}
+
+.equation__body {
+  font-size: var(--t-8);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+/* The equation is the object; the toggle underneath it is an aside on it. */
+.equation > .reveal {
+  margin-top: -2px;
+}
+
+.equation__units {
+  font-size: var(--t-3);
+  color: var(--ink-soft);
+  border-top: 1px solid var(--rule);
+  padding-top: var(--sp-3);
+}
+
+.equation__note {
+  font-size: var(--t-5) !important;
+  line-height: var(--lh-snug) !important;
+  color: var(--ink-soft);
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sp-4);
+}
+
+.scrub {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.scrub__label {
+  font-size: var(--t-3);
+  color: var(--ink-soft);
+  width: 66px;
+}
+
+.scrub input,
+.control input {
+  flex-grow: 1;
+  width: 100%;
+  accent-color: var(--ink);
+}
+
+/*
+ * The buttons are a row of operations on one panel, so they read as a row.
+ * Prose inside the block takes the full width above them.
+ */
+.breakit {
+  border: 1px dashed #c2a488;
+  border-radius: 4px;
+  background: #fdf9f4;
+  padding: var(--sp-4) var(--sp-5);
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.breakit > .eyebrow,
+.breakit > p {
+  flex: 1 0 100%;
+}
+
+.breakit .eyebrow {
+  color: var(--assumption);
+}
+
+.breakit p {
+  font-size: var(--t-6) !important;
+  line-height: var(--lh-snug) !important;
+  color: var(--ink-soft);
+}
+
+.breakit button,
+.share {
+  font-family: var(--mono);
+  font-size: var(--t-3);
+  padding: 7px 13px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.breakit button:hover,
+.share:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.boundary {
+  border: 1px solid var(--fail);
+  background: var(--fail-bg);
+  border-radius: 4px;
+  padding: var(--sp-3) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.boundary .eyebrow {
+  color: var(--fail);
+}
+
+.boundary__message {
+  margin: 0;
+  font-size: var(--t-3) !important;
+  color: var(--fail);
+}
+
+.prose--wide {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--sp-7) var(--sp-7) 96px;
+}
+
+@media (max-width: 1000px) {
+  .prose--wide {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.charts--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-3);
+}
+
+.callout {
+  border-left: 3px solid var(--accounting);
+  padding: 2px 0 2px var(--sp-4);
+  font-size: var(--t-8) !important;
+  line-height: 1.45 !important;
+}
+
+.share {
+  background: transparent;
+}
+
+@media (max-width: 1000px) {
+  .charts--three {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .charts--three {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.caseintro {
+  border-left: 3px solid var(--ink);
+  padding: 2px 0 2px var(--sp-5);
+  margin: 10px 0 var(--sp-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.caseintro p {
+  margin: 0;
+  font-size: var(--t-6) !important;
+  line-height: 1.65 !important;
+  color: var(--ink-soft);
+}
+
+.caseintro__note {
+  font-size: var(--t-5) !important;
+  color: var(--ink-faint);
+}

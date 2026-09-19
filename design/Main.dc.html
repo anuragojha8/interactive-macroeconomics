@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #FBFAF7; color: #23201B;
+           font-family: Newsreader, Georgia, 'Times New Roman', serif; }
+    a { color: #2F5FA8; text-decoration: none; border-bottom: 1px solid #C3D0E6; }
+    a:hover { color: #1E4478; }
+    * { box-sizing: border-box; }
+  </style>
+</helmet>
+
+<div style="width: 1440px; min-height: 1100px; background: #FBFAF7;">
+
+  <!-- top bar -->
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 58px; border-bottom: 1px solid #E3DFD6; background: #FBFAF7;">
+    <div style="display: flex; align-items: baseline; gap: 14px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #23201B; font-weight: 600;">Interactive Macroeconomics</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8378;">one economy, five primitives</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 20px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8378;">math detail</span>
+      <div style="display: flex; border: 1px solid #E3DFD6; border-radius: 3px; overflow: hidden;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 5px 11px; color: #8A8378;">intuition</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 5px 11px; background: #23201B; color: #FBFAF7;">algebra</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 5px 11px; color: #8A8378;">full</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 208px minmax(0, 1fr) 424px; gap: 44px; padding: 36px 40px 60px;">
+
+    <!-- left rail -->
+    <div style="display: flex; flex-direction: column; gap: 30px;">
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8A8378;">Contents</span>
+        <span style="font-size: 15px; color: #5C564C;">0 · The Kernel</span>
+        <span style="font-size: 15px; color: #5C564C;">1 · Measuring the macroeconomy</span>
+        <span style="font-size: 15px; color: #5C564C;">2 · A model of production</span>
+        <span style="font-size: 15px; color: #23201B; font-weight: 600; border-left: 2px solid #2F7D5E; margin-left: -10px; padding-left: 8px;">3 · The Solow model</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A8A296; padding-left: 0px;">§3.2 Saving more</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #E3DFD6; padding-top: 18px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8A8378;">Symbols</span>
+        <div style="display: flex; justify-content: space-between;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">Ā</span><span style="font-size: 13px; color: #8A8378;">productivity</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">Kₜ</span><span style="font-size: 13px; color: #8A8378;">capital</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">s̄</span><span style="font-size: 13px; color: #8A8378;">investment rate</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">d̄</span><span style="font-size: 13px; color: #8A8378;">depreciation</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">Δt</span><span style="font-size: 13px; color: #8A8378;">period length</span></div>
+      </div>
+    </div>
+
+    <!-- prose column -->
+    <div style="display: flex; flex-direction: column; gap: 22px; max-width: 660px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #2F7D5E;">Chapter 3 · §2</span>
+        <span style="height: 1px; background: #E3DFD6; flex-grow: 1;"></span>
+      </div>
+
+      <h1 style="margin: 0; font-size: 40px; line-height: 1.14; font-weight: 500; letter-spacing: -0.015em; text-wrap: pretty;">Why saving more doesn&rsquo;t make you richer today</h1>
+
+      <p style="margin: 0; font-size: 19px; line-height: 1.62; color: #5C564C; text-wrap: pretty;">Every economy faces the same trade. Consume now, or build something that produces later. The Solow model is what happens when you write that trade down as one line of state and let it run.</p>
+
+      <div style="display: flex; gap: 8px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 4px 9px; border-radius: 3px; background: #E8F3EE; color: #2F7D5E;">P1 stocks &amp; flows</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 4px 9px; border-radius: 3px; background: #EAF0F9; color: #2F5FA8;">P2 identities</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 4px 9px; border-radius: 3px; background: #F9F1E7; color: #A8702F;">P4 assumptions</span>
+      </div>
+
+      <p style="margin: 0; font-size: 18px; line-height: 1.72; text-wrap: pretty;">Chapter 2 left you with an economy that has no memory. Capital sat at whatever you set it to, forever, because nothing in the model could change it. That is why we wrote it <span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px;">K&#772;</span> &mdash; the overbar meant fixed.</p>
+
+      <p style="margin: 0; font-size: 18px; line-height: 1.72; text-wrap: pretty;">Now we add one relation. Some of this year&rsquo;s output gets built into next year&rsquo;s capital, and some of the existing capital wears out. The bar comes off.</p>
+
+      <!-- equation card -->
+      <div style="border: 1px solid #E3DFD6; border-radius: 4px; background: #F5F3EE; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #2F7D5E;">accumulation · P1</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8378;">capital-accumulation</span>
+        </div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 21px; color: #23201B; letter-spacing: -0.01em;">K<sub style="font-size: 13px;">t+1</sub> &nbsp;=&nbsp; K<sub style="font-size: 13px;">t</sub> &nbsp;+&nbsp; ( I<sub style="font-size: 13px;">t</sub> &minus; d&#772;K<sub style="font-size: 13px;">t</sub> ) &middot; &Delta;t</div>
+        <div style="display: flex; gap: 10px; align-items: center; border-top: 1px solid #E3DFD6; padding-top: 13px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5C564C;">$ + ($/year &minus; $/year) &times; year = $</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #2F7D5E;">&#10003;</span>
+        </div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #5C564C;">Drop the <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">&Delta;t</span> and you are adding a stock to a flow. The engine refuses to run &mdash; and that refusal is the lesson.</p>
+        <div style="display: flex; gap: 10px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 5px 10px; border: 1px solid #D6D1C6; border-radius: 3px; color: #5C564C;">show the code</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 5px 10px; border: 1px solid #D6D1C6; border-radius: 3px; color: #5C564C;">show the derivation</span>
+        </div>
+      </div>
+
+      <p style="margin: 0; font-size: 18px; line-height: 1.72; text-wrap: pretty;">Two lines of arithmetic, and the model now has a past. Before you move anything, commit to an answer: if the country decides to invest 30% of output instead of 20%, what happens to output <em>this year</em>?</p>
+
+      <!-- predict inline callout -->
+      <div style="border-left: 2px solid #A8702F; padding: 4px 0 4px 18px; display: flex; flex-direction: column; gap: 9px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #A8702F;">Predict before you run</span>
+        <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #5C564C;">Three sign predictions, then the model runs. Your calling record is kept &mdash; you will find out quickly where your intuition is reliable and where it is not.</p>
+      </div>
+
+      <p style="margin: 0; font-size: 18px; line-height: 1.72; text-wrap: pretty;">Most people say output rises. It does not. Not this year, not by a cent. Output depends on the capital that already exists, and no decision made today can retroactively build it. What moves immediately is the split: investment up 50%, consumption down 12.5%. Output only responds from next year, through the capital that this year&rsquo;s investment actually creates.</p>
+
+      <!-- break it -->
+      <div style="border: 1px dashed #C9A98A; border-radius: 4px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; background: #FDF9F4;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #A8702F;">Break it</span>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #5C564C;">Set <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px;">d&#772; = 0</span> so capital never wears out. The steady state disappears, the solver reports that it never settles, and the feedback loop crosses a gain of 1 into <em>amplifying</em>. Two independent parts of the engine agree, which is the point.</p>
+      </div>
+    </div>
+
+    <!-- model stage -->
+    <div style="border: 1px solid #E3DFD6; border-radius: 5px; background: #F5F3EE; display: flex; flex-direction: column; align-self: start;">
+
+      <div style="padding: 15px 18px; border-bottom: 1px solid #E3DFD6; display: flex; align-items: baseline; justify-content: space-between;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.04em;">solow-v1</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8A8378;">extends production-v1</span>
+      </div>
+
+      <!-- controls -->
+      <div style="padding: 17px 18px; display: flex; flex-direction: column; gap: 15px; border-bottom: 1px solid #E3DFD6;">
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px;">s&#772; &nbsp;investment rate</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600;">20.00%</span>
+          </div>
+          <div style="height: 3px; background: #DFDACF; border-radius: 2px; position: relative;">
+            <div style="position: absolute; left: 0; top: 0; height: 3px; width: 20%; background: #23201B; border-radius: 2px;"></div>
+            <div style="position: absolute; left: 20%; top: -4px; width: 11px; height: 11px; margin-left: -5px; border-radius: 50%; background: #FBFAF7; border: 2px solid #23201B;"></div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px;">d&#772; &nbsp;depreciation</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600;">10.00%</span>
+          </div>
+          <div style="height: 3px; background: #DFDACF; border-radius: 2px; position: relative;">
+            <div style="position: absolute; left: 0; top: 0; height: 3px; width: 10%; background: #23201B; border-radius: 2px;"></div>
+            <div style="position: absolute; left: 10%; top: -4px; width: 11px; height: 11px; margin-left: -5px; border-radius: 50%; background: #FBFAF7; border: 2px solid #23201B;"></div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px;">Ā &nbsp;productivity</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600;">1.00</span>
+          </div>
+          <div style="height: 3px; background: #DFDACF; border-radius: 2px; position: relative;">
+            <div style="position: absolute; left: 0; top: 0; height: 3px; width: 9%; background: #23201B; border-radius: 2px;"></div>
+            <div style="position: absolute; left: 9%; top: -4px; width: 11px; height: 11px; margin-left: -5px; border-radius: 50%; background: #FBFAF7; border: 2px solid #23201B;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- values -->
+      <div style="padding: 15px 18px; border-bottom: 1px solid #E3DFD6; display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; justify-content: space-between;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8A8378;">Values</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8A8378;">t = 0</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 46px minmax(0, 1fr) 84px; gap: 4px 8px; align-items: baseline;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #2F7D5E;">K<sub style="font-size: 9px;">t</sub></span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-align: right;">1,000.00</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8378;">$ &middot; stock</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">Y</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-align: right;">1,000.00</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8378;">$/year &middot; flow</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">I</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-align: right;">200.00</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8378;">$/year &middot; flow</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">C</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-align: right;">800.00</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8378;">$/year &middot; flow</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">d&#772;K</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-align: right;">100.00</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8378;">$/year &middot; flow</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">MPK</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-align: right;">33.33%</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8378;">1/year</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">y</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-align: right;">1.0000</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8378;">$/(yr&middot;person)</span>
+        </div>
+        <div style="border-top: 1px solid #E3DFD6; padding-top: 9px; display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #5C564C;">steady state K*</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600;">2,828.43</span>
+        </div>
+      </div>
+
+      <!-- invariants -->
+      <div style="padding: 15px 18px; border-bottom: 1px solid #E3DFD6; display: flex; flex-direction: column; gap: 7px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8A8378;">Invariants &mdash; must always hold</span>
+        <div style="display: flex; gap: 9px; align-items: baseline;"><span style="color: #2F7D5E; font-size: 12px;">&#10003;</span><span style="font-size: 14px; color: #5C564C; flex-grow: 1;">Factor payments exhaust output</span></div>
+        <div style="display: flex; gap: 9px; align-items: baseline;"><span style="color: #2F7D5E; font-size: 12px;">&#10003;</span><span style="font-size: 14px; color: #5C564C; flex-grow: 1;">Factor shares sum to one</span></div>
+        <div style="display: flex; gap: 9px; align-items: baseline;"><span style="color: #2F7D5E; font-size: 12px;">&#10003;</span><span style="font-size: 14px; color: #5C564C; flex-grow: 1;">Constant returns to scale</span></div>
+        <div style="display: flex; gap: 9px; align-items: baseline;"><span style="color: #2F7D5E; font-size: 12px;">&#10003;</span><span style="font-size: 14px; color: #5C564C; flex-grow: 1;">Output is consumed or invested</span></div>
+      </div>
+
+      <!-- relations -->
+      <div style="padding: 15px 18px; border-bottom: 1px solid #E3DFD6; display: flex; flex-direction: column; gap: 7px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8A8378;">Relations</span>
+        <div style="display: flex; gap: 10px; align-items: baseline;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #A8702F; width: 82px; letter-spacing: 0.05em;">TECHNOLOGY</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #23201B;">Y = Ā&middot;K<sub style="font-size: 8px;">t</sub><sup style="font-size: 8px;">1/3</sup>&middot;L&#772;<sup style="font-size: 8px;">2/3</sup></span></div>
+        <div style="display: flex; gap: 10px; align-items: baseline;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #A8702F; width: 82px; letter-spacing: 0.05em;">BEHAVIOR</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #23201B;">I = s&#772;Y</span></div>
+        <div style="display: flex; gap: 10px; align-items: baseline;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #A8702F; width: 82px; letter-spacing: 0.05em;">BEHAVIOR</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #23201B;">C = (1 &minus; s&#772;)Y</span></div>
+        <div style="display: flex; gap: 10px; align-items: baseline;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #2F5FA8; width: 82px; letter-spacing: 0.05em;">DEFINITION</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #23201B;">MPK = &alpha;<sub style="font-size: 8px;">K</sub>&middot;Y/K</span></div>
+        <div style="display: flex; gap: 10px; align-items: baseline;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #A8702F; width: 82px; letter-spacing: 0.05em;">CLEARING</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #23201B;">r = MPK</span></div>
+        <div style="display: flex; gap: 10px; align-items: baseline;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #2F7D5E; width: 82px; letter-spacing: 0.05em;">ACCUMULATION</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #23201B;">K<sub style="font-size: 8px;">t+1</sub> = K<sub style="font-size: 8px;">t</sub> + (I&minus;d&#772;K)&Delta;t</span></div>
+        <div style="display: flex; gap: 14px; padding-top: 6px; border-top: 1px solid #E3DFD6; margin-top: 3px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #2F5FA8;">&#9632; accounting</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #A8702F;">&#9632; assumption</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #2F7D5E;">&#9632; accumulation</span>
+        </div>
+      </div>
+
+      <!-- loop -->
+      <div style="padding: 14px 18px; display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8A8378;">Feedback loop</span>
+        <div style="display: flex; align-items: baseline; gap: 10px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #23201B;">K<sub style="font-size: 8px;">t</sub> &rarr; Y &rarr; I &rarr; K<sub style="font-size: 8px;">t</sub></span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 2px 7px; border-radius: 3px; background: #E8F3EE; color: #2F7D5E;">stabilizing</span>
+        </div>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8378;">gain 0.9667 &mdash; a disturbance dies away</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
