@@ -12,6 +12,7 @@ import {
 import { ledgerModel } from '../../src/models/kernel/ledger';
 import { solowModel } from '../../src/models/solow';
 import { models } from '../../src/models/registry';
+import { VERANO_ACCOUNTS, VERANO_PUBLISHED } from '../../src/case/verano';
 import {
   thermostatBangBangModel,
   thermostatConstantModel,
@@ -463,5 +464,33 @@ describe('state follows accumulation, not the label', () => {
     expect(infeasible.severity).toBe('error');
     expect(infeasible.message).toMatch(/left the region/);
     expect(stopped.path!.length).toBeLessThan(61);
+  });
+});
+
+describe('the Verano case closes', () => {
+  // Regression: splitting the tax variable left Verano inheriting a default,
+  // and the case's corrected accounts stopped balancing without any test noticing.
+  it('balances once the wage bill is corrected', () => {
+    const s = solveStatic(circularFlowModel, { overrides: VERANO_ACCOUNTS });
+    expect(s.invariantResults.filter((r) => !r.passed)).toEqual([]);
+    expectClose(s.values.Y!, s.values.Yincome!, 1e-12);
+  });
+
+  it('fails exactly one identity as published', () => {
+    const s = solveStatic(circularFlowModel, { overrides: VERANO_PUBLISHED });
+    expect(s.invariantResults.filter((r) => !r.passed).map((r) => r.id)).toEqual([
+      'expenditure-equals-income',
+    ]);
+  });
+
+  it('publishes a gap well beyond a normal statistical discrepancy', () => {
+    const s = solveStatic(circularFlowModel, { overrides: VERANO_PUBLISHED }).values;
+    expect((s.Y! - s.Yincome!) / s.Y!).toBeGreaterThan(0.03);
+  });
+
+  it('agrees with chapter 2 about factor shares', () => {
+    const v = solveStatic(circularFlowModel, { overrides: VERANO_ACCOUNTS }).values;
+    expectClose(v.Pi! / v.factorCost!, 1 / 3, 1e-9);
+    expectClose(v.W! / v.factorCost!, 2 / 3, 1e-9);
   });
 });

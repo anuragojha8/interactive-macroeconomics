@@ -13,26 +13,37 @@
  */
 import type { VarId } from '../engine/types';
 
-/** Verano's national accounts, in billions of veral per year. */
+/**
+ * Verano's national accounts, in billions of veral per year.
+ *
+ * Taxes on production are set explicitly. When the tax variable was split in
+ * two, these accounts were left inheriting the textbook default of 100, and the
+ * case quietly stopped closing: income came to 2,464 against spending of 3,024.
+ * The income side is now calibrated so that factor shares at factor cost are the
+ * one third and two thirds Chapter 2 assumes: 1,816 and 908 of 2,724.
+ */
 export const VERANO_ACCOUNTS: Record<VarId, number> = {
   C: 2100,
   I: 540,
   G: 600,
   NX: -216,
   T: 660,
-  W: 1900,
-  Pi: 464,
+  Tprod: 300,
+  W: 1816,
+  Pi: 908,
   nominalY: 3024,
   deflator: 100,
 };
 
 /**
- * The figure the ministry actually published for wages. It is fifty short, and
- * the discrepancy is the point of Part Two.
+ * The figure the statistical office actually published for wages: 150 short, or
+ * about five percent of output. That is deliberately several times a normal
+ * statistical discrepancy, so the case's inference that income went unrecorded
+ * is sound rather than a straw man.
  */
 export const VERANO_PUBLISHED: Record<VarId, number> = {
   ...VERANO_ACCOUNTS,
-  W: 1850,
+  W: 1666,
 };
 
 /** Verano's productive side: two million workers, and capital well below rest. */
