@@ -1,5 +1,7 @@
 # Interactive Macroeconomics
 
+**Live:** https://anurag-interactice-macroeconomics.netlify.app — redeploys on every push to `main`.
+
 A client-side web book that teaches macroeconomics as a **single executable model
 of an economy**, built from five primitives, where every chapter adds relations to
 the same engine and every claim can be run, shocked, and traced back to the
@@ -126,4 +128,10 @@ npm run test:e2e  # Playwright: reading flows, offline, accessibility
 
 ```bash
 npm run verify    # the whole gate: types, prose, tests, build, budget, e2e
+```
+
+The same end-to-end suite runs against the live site:
+
+```bash
+BASE_URL=https://anurag-interactice-macroeconomics.netlify.app npm run test:e2e
 ```
