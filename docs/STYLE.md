@@ -123,6 +123,12 @@ the content. Ordinal words as prose transitions are not.
 Every technical term is defined at first use, in the sentence that introduces it,
 in one clause. No term is used before its definition anywhere in reading order.
 
+That defining use is marked with `<Term>`, and nothing else is. A term looks the
+same wherever it is defined, in the body, a case file or a Break-it box: italic,
+in full ink. Later uses of the term are plain. Italics are not used for emphasis;
+put the important word where the sentence lands instead. The linter rejects a
+bare `<em>` in chapter text.
+
 Every symbol is registered in the symbol sheet with an `introducedIn` anchor, and
 notation follows Jones 5e (overbars for fixed quantities, lowercase for
 per-person quantities). When a later chapter changes a symbol's status — capital

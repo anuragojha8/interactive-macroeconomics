@@ -1,6 +1,7 @@
 import { ErrorBoundary } from '../components/ErrorBoundary';
 import { CaseAnswer, CaseFigures, CaseFile } from '../components/mdx/CaseFile';
 import { Delta } from '../components/mdx/Delta';
+import { Term } from '../components/mdx/Term';
 import { Result } from '../components/mdx/Result';
 import { ModelStage } from '../components/stage/ModelStage';
 import { ReconcilePanel } from '../components/stage/ReconcilePanel';
@@ -28,7 +29,7 @@ export function Chapter1(): JSX.Element {
 
         <h2 id="circular-flow">The circular flow</h2>
         <p>
-          Gross domestic product, or GDP, is the market value of everything an economy produces in
+          <Term>Gross domestic product</Term>, or GDP, is the market value of everything an economy produces in
           a year. You can count it three ways: add up what everyone bought, add up what everyone
           earned, or add up what every producer made. All three give the same total, because they
           measure one flow at different points on a circle. Buy a coffee and your spending becomes
@@ -36,8 +37,8 @@ export function Chapter1(): JSX.Element {
           surplus and the tax on the sale. Nothing falls out of the sum along the way.
         </p>
         <p>
-          The third method adds up the value each producer adds, rather than everything it sells,
-          and it answers an objection that is probably already forming. A steel mill sells steel to
+          The third method adds up each producer&rsquo;s <Term>value added</Term>, what it sells less
+          what it bought from other producers, and it answers an objection that is probably already forming. A steel mill sells steel to
           a carmaker, and the car is counted in GDP. Has the steel been counted twice? No. Only the
           value added at each stage enters the total: the car&rsquo;s price less what the carmaker
           paid for steel, plus the steel&rsquo;s price less what the mill paid for ore, and so on
@@ -47,7 +48,7 @@ export function Chapter1(): JSX.Element {
         <p>
           The panel below shows the other two methods. The spending side splits output into
           consumption, investment, government purchases and net exports. The income side splits the
-          same total into wages, the operating surplus that goes to the owners of businesses, and
+          same total into wages, the <Term>operating surplus</Term> that goes to the owners of businesses, and
           taxes on production such as sales tax. Income tax is missing from that list on purpose: it
           is paid out of wages and surplus that are already counted, and adding it again would count
           the same income twice. The panel currently reports{' '}
@@ -76,10 +77,10 @@ export function Chapter1(): JSX.Element {
 
         <h2 id="balances">Sector balances</h2>
         <p>
-          Private saving is what the private sector has left of its income after tax and
-          consumption. Public saving is what the government collects in taxes less what it buys,
+          <Term>Private saving</Term> is what the private sector has left of its income after tax and
+          consumption. <Term>Public saving</Term> is what the government collects in taxes less what it buys,
           and it turns negative whenever the government runs a deficit. Add the two, subtract
-          investment, and what remains is the country&rsquo;s net lending to the rest of the world.
+          investment, and what remains is the country&rsquo;s <Term>net lending</Term> to the rest of the world.
           It equals the trade balance:
         </p>
         <p className="callout">
@@ -101,12 +102,12 @@ export function Chapter1(): JSX.Element {
           and nobody calls it a crisis. Whether it is a problem depends on what the investment
           bought and whether the borrowing can be repaid, and the identity says nothing about
           either. What it does settle is that any story about a trade deficit must also be a story
-          about saving and investment. (Strictly, the left side equals the current account, which
+          about saving and investment. (Strictly, the left side equals the <Term>current account</Term>, which
           also counts income earned on assets abroad. For a country that owes nothing and owns
           nothing abroad, as here, the two are the same.)
         </p>
         <p>
-          Rearrange the identity into three balances, one each for the private sector, the
+          Rearrange the identity into three <Term>sector balances</Term>, one each for the private sector, the
           government and the rest of the world, and they sum to exactly zero. One sector can run a
           surplus only if another runs a deficit. A government that promises to shrink its own
           deficit while households save more and the trade balance stays put is promising
@@ -116,15 +117,14 @@ export function Chapter1(): JSX.Element {
 
         <h2 id="real-nominal">Real and nominal</h2>
         <p>
-          Output measured at this year&rsquo;s prices is <em>nominal</em>. It rises when an economy
+          Output measured at this year&rsquo;s prices is <Term>nominal</Term>. It rises when an economy
           makes more, and it also rises when the same things cost more, which is a much less
           cheerful kind of growth. Divide nominal output by a price index and what remains is{' '}
-          <em>real</em> output, which tracks quantities rather than prices. The index is set to 100
-          in a chosen base year, and the choice of year is arbitrary.
+          <Term>real</Term> output, which tracks quantities rather than prices. The index is set to 100
+          in a chosen <Term>base year</Term>, and the choice of year is arbitrary.
         </p>
         <p>
-          The index used here, the GDP deflator, prices everything the economy produces. The
-          consumer price index quoted on the news prices a typical household&rsquo;s shopping
+          The index used here, the <Term>GDP deflator</Term>, prices everything the economy produces. The <Term>consumer price index</Term> quoted on the news prices a typical household&rsquo;s shopping
           instead, imports included, so the two can drift apart. Neither is wrong. They answer
           different questions.
         </p>
@@ -141,7 +141,7 @@ export function Chapter1(): JSX.Element {
           a different rate from the same data built on another&rsquo;s. In the United States the
           problem came to a head with computers, whose prices fell so fast that the choice of base
           year visibly changed the measured growth of the whole economy. In 1996 the statistical
-          agency gave up on fixed weights and moved to a chained index, which updates the weights
+          agency gave up on fixed weights and moved to a <Term>chained index</Term>, which updates the weights
           every year. The computer industry broke the national accounts by being too good at its
           job.
         </p>
@@ -203,7 +203,7 @@ export function Chapter1(): JSX.Element {
               as="difference"
             />
             , which is too much to blame on rounding. National accounts do carry a line for gaps
-            like this, the statistical discrepancy, because spending and income are measured from
+            like this, the <Term>statistical discrepancy</Term>, because spending and income are measured from
             different sources that never agree perfectly. In most countries it stays within a
             percent or two of output. Verano&rsquo;s gap is{' '}
             <Delta

@@ -148,8 +148,20 @@ const noShortSentence: Finding[] = [];
 
 for (const root of ROOTS) {
   for (const file of files(root)) {
-    const source = readFileSync(file, 'utf8');
+        const source = readFileSync(file, 'utf8');
     const blocks = paragraphs(proseLines(source));
+
+    // §5: a defined term is marked with <Term>, and only a defined term. A bare
+    // <em> in chapter text is either an unmarked definition or emphasis, and
+    // the guide wants neither.
+    if (file.includes('content')) {
+      source.split('\n').forEach((text, i) => {
+        if (/<em>/.test(text)) {
+          failures.push({ file, line: i + 1, text: text.trim().slice(0, 90), match: '<em>', why: 'mark a defined term with <Term>; emphasis comes from sentence order (§5)' });
+        }
+      });
+    }
+
 
     for (const { line, text } of blocks) {
       // §3: the contrast-then-correction tic, the loudest tell in version 1.

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ErrorBoundary } from '../components/ErrorBoundary';
+import { Term } from '../components/mdx/Term';
 import { MathText } from '../components/mdx/MathText';
 import { CaseAnswer, CaseFigures, CaseFile } from '../components/mdx/CaseFile';
 import { Delta } from '../components/mdx/Delta';
@@ -176,7 +177,7 @@ export function Chapter3(): JSX.Element {
           {closedFormExists ? (
             <>
               Capital climbs until the new capital built each year exactly replaces what wears out.
-              That level is the <em>steady state</em>: the stock at which the flows in and out
+              That level is the <Term>steady state</Term>: the stock at which the flows in and out
               cancel, so it stops changing. The simulation settles at{' '}
               <Result
                 model={solowModel}
@@ -285,7 +286,7 @@ export function Chapter3(): JSX.Element {
           <span className="eyebrow">Break it</span>
           <p>
             Set the depreciation rate to zero. Nothing wears out, so the steady state disappears,
-            and the loop gain crosses one into <em>amplifying</em>. The convergence check and the
+            and the loop gain crosses one into amplifying. The convergence check and the
             loop analysis reach that conclusion independently, by different routes, which is
             reassuring.
           </p>
@@ -403,18 +404,19 @@ export function Chapter3(): JSX.Element {
                 {((1 - 1 / 3) * VERANO_SOLOW.d! * 100).toFixed(0)}%
               </span>{' '}
               of the remaining gap each year. Studies across real countries measure something
-              closer to two percent, a half-life of about thirty-five years. A finance minister
+              closer to two percent, which gives a <Term>half-life</Term>, the time it takes to
+              close half the gap, of about thirty-five years. A finance minister
               handed the model&rsquo;s timeline should be told it is the best case, and why.
             </p>
             <p>
-              Consumption per worker ends up higher, and that was not guaranteed. Steady-state
-              consumption is highest when the investment rate equals the capital exponent, which is
-              one third here, the same one third that bent the curve in Chapter 2. Verano starts
+              Consumption per worker ends up higher, and that was not guaranteed. Steady-state consumption is highest when the investment rate equals the capital
+              exponent, a setting economists call the <Term>golden rule</Term>. Here that is one
+              third, the same one third that bent the curve in Chapter 2. Verano starts
               below that rate, so the plan moves it toward the best rate rather than past it.
             </p>
             <p>
               The two directions are not symmetric. A country that invests more than the capital
-              exponent is <em>dynamically inefficient</em>: cutting its investment rate would raise
+              exponent is <Term>dynamically inefficient</Term>: cutting its investment rate would raise
               consumption in every period, with nobody worse off at any date. Below that rate there
               is no such free lunch. Raising investment always costs the present generation
               something to benefit a later one, and how to weigh the two is a question about whom

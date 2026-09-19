@@ -302,3 +302,13 @@
   font-size: var(--t-5) !important;
   color: var(--ink-faint);
 }
+
+/*
+ * A defined term looks the same in the body, a case file or a Break-it box:
+ * italic, full ink. Boxes mute their prose, and a term that muted with them
+ * read as a different kind of thing.
+ */
+.term {
+  font-style: italic;
+  color: var(--ink);
+}

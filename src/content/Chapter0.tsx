@@ -3,6 +3,7 @@ import { ErrorBoundary } from '../components/ErrorBoundary';
 import { solveDynamic } from '../engine/solve';
 import { CaseFile } from '../components/mdx/CaseFile';
 import { SortExercise } from '../components/mdx/SortExercise';
+import { Term } from '../components/mdx/Term';
 import { MathText } from '../components/mdx/MathText';
 import { Controls } from '../components/stage/Controls';
 import { ReconcilePanel } from '../components/stage/ReconcilePanel';
@@ -145,8 +146,8 @@ export function Chapter0(): JSX.Element {
 
         <h2 id="stocks">Stocks and flows</h2>
         <p>
-          Start with the bathtub. The water in it is a <em>stock</em>, a quantity you measure at a
-          single moment, like a snapshot. The tap is a <em>flow</em>, a quantity you can only
+          Start with the bathtub. The water in it is a <Term>stock</Term>, a quantity you measure at a
+          single moment, like a snapshot. The tap is a <Term>flow</Term>, a quantity you can only
           measure over a stretch of time, like a video. Your bank balance is a stock and your salary
           is a flow. In an economy, capital is a stock and investment is a flow.
         </p>
@@ -195,9 +196,9 @@ export function Chapter0(): JSX.Element {
 
         <h2 id="identities">Identities and budget constraints</h2>
         <p>
-          An <em>identity</em> is an equation that holds because of how its terms are defined. You
+          An <Term>identity</Term> is an equation that holds because of how its terms are defined. You
           cannot test it, refute it, or repeal it, however much a finance minister might like to.
-          A <em>budget constraint</em> is the everyday version. Over any period, the money
+          A <Term>budget constraint</Term> is the everyday version. Over any period, the money
           coming into a household, a firm or a government equals the money going out, once
           borrowing and saving are counted. A government that spends more than it collects in
           taxes must borrow the difference, and that borrowing is what adds to the debt. The
@@ -224,7 +225,7 @@ export function Chapter0(): JSX.Element {
 
         <h2 id="rules">Behavioural rules</h2>
         <p>
-          A <em>behavioural rule</em> describes what somebody chooses to do: how much a family saves,
+          A <Term>behavioural rule</Term> describes what somebody chooses to do: how much a family saves,
           how fast a firm hires, how a central bank sets interest rates. Rules are where a model makes
           its claims about the world, so they are where it is most often wrong and the part most
           worth arguing about. When two economists disagree, check the rules first. The accounting
@@ -258,8 +259,7 @@ export function Chapter0(): JSX.Element {
           never rests: it overshoots, switches off, undershoots and starts again, the way most
           household thermostats do. Proportional control settles short of the target and stays
           there. Right at the target it asks for no heat while the room is still losing some, so
-          it parks where the heat it asks for matches the leak. Engineers call that gap
-          steady-state error, and it comes with the rule rather than with a faulty thermostat.
+          it parks where the heat it asks for matches the leak. Engineers call that gap <Term>steady-state error</Term>, and it comes with the rule rather than with a faulty thermostat.
           Central bank rules carry a “neutral” interest rate for a similar reason: it is the
           setting meant to hold the economy steady when everything is on target. Nobody can
           observe it directly, which is why it is argued over so much.
@@ -272,13 +272,13 @@ export function Chapter0(): JSX.Element {
 
         <h2 id="clearing">Market clearing</h2>
         <p>
-          A market <em>clears</em> when the quantity buyers want equals the quantity sellers offer
+          A market <Term>clears</Term> when the quantity buyers want equals the quantity sellers offer
           at the going price. Stated that way it is a definition. Stated as something that actually
           happens, it is an assumption about a process: a price that is too low gets bid up, round
           after round, until the shortage disappears.
         </p>
         <p>
-          In software terms that process is a fixed-point search, and if you have trained a model
+          In software terms that process is a <Term>fixed-point search</Term>, and if you have trained a model
           you have seen it fail. In the market below, the price moves each round in proportion to
           excess demand, much as gradient descent moves a weight in proportion to the gradient. A
           small step homes in on the right price. Past a threshold, each correction overshoots by

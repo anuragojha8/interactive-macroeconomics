@@ -3,6 +3,7 @@ import { CaseAnswer, CaseFigures, CaseFile } from '../components/mdx/CaseFile';
 import { Delta } from '../components/mdx/Delta';
 import { Predict } from '../components/mdx/Predict';
 import { Result } from '../components/mdx/Result';
+import { Term } from '../components/mdx/Term';
 import { MathText } from '../components/mdx/MathText';
 import { ModelStage } from '../components/stage/ModelStage';
 import { TracePanel } from '../components/stage/TracePanel';
@@ -47,9 +48,10 @@ export function Chapter2(): JSX.Element {
 
         <h2 id="technology">The production function</h2>
         <p>
-          A <em>production function</em> says how much output an economy can get from its inputs.
-          The one used here takes capital (machines, buildings, roads) and labour (people at work),
-          raises each to a power, and multiplies the result by a productivity term. That term
+          A <Term>production function</Term> says how much output an economy can get from its inputs.
+          The one used here takes <Term>capital</Term> (machines, buildings, roads) and <Term>labour</Term> (people at
+          work),
+          raises each to a power, and multiplies the result by a <Term>productivity term</Term>. That term
           stands for everything else that makes an economy productive, which is a larger category
           than economists like to admit.
         </p>
@@ -63,7 +65,8 @@ export function Chapter2(): JSX.Element {
           form, with each input paid what its last unit produces, the share of output going to
           capital comes out equal to capital&rsquo;s exponent, and the same holds for labour. That
           happens for any exponents at all. So choosing one third because capital&rsquo;s observed
-          share is about one third is calibration rather than evidence: the fit is guaranteed, and
+          share is about one third is <Term>calibration</Term>, choosing a number to match the data,
+          rather than evidence: the fit is guaranteed, and
           it says nothing about whether the form is right.
         </p>
         <p>
@@ -97,7 +100,7 @@ export function Chapter2(): JSX.Element {
           machines, nowhere near twice the output. The reason is that the new machines need people
           to run them, and there are no new people. Each addition to the capital stock produces
           less than the one before, because the same workforce is spread across more of it. That is{' '}
-          <em>diminishing returns</em>: add more of one input while holding the others fixed, and
+          <Term>diminishing returns</Term>: add more of one input while holding the others fixed, and
           each extra unit buys less than the last.
         </p>
 
@@ -117,7 +120,7 @@ export function Chapter2(): JSX.Element {
 
         <p>
           Doubling capital and labour together is a different question, and the answer is exactly
-          double. The function has <em>constant returns to scale</em>: raise every input in the
+          double. The function has <Term>constant returns to scale</Term>: raise every input in the
           same proportion and output rises in that proportion too. Build a second factory
           identical to the first, staff it the same way, and you get a second factory&rsquo;s
           output. Diminishing returns apply to one input at a time and say nothing about scaling
@@ -127,7 +130,7 @@ export function Chapter2(): JSX.Element {
         <h2 id="shares">Factor payments</h2>
         <p>
           Now the question of who gets paid what. Under competition, each input is paid its{' '}
-          <em>marginal product</em>, meaning what the last unit of it adds to output. The rental
+          <Term>marginal product</Term>, meaning what the last unit of it adds to output. The rental
           rate on capital equals the marginal product of capital, and the wage equals the marginal
           product of labour. Neither needs a story about bargaining. Both fall straight out of the
           production function once competition is assumed.
@@ -192,15 +195,14 @@ export function Chapter2(): JSX.Element {
             digits={0}
           />{' '}
           its output per worker. Capital accounts for part of the gap in living standards, and
-          the rest lands in the productivity term. That term is a residual: whatever is left after
+          the rest lands in the productivity term. That term is a <Term>residual</Term>: whatever is left after
           the inputs have been counted. It measures what the model fails to explain rather than
           something the model has found. The economist Moses Abramovitz called it a measure of our
           ignorance in 1956, and the description has aged well.
         </p>
         <p>
           Two cautions about that residual, and both cut against the reading this chapter invites.
-          First, it includes more than technology. Skills and education, which economists call
-          human capital, belong among the inputs and are missing here. The standard studies that
+          First, it includes more than technology. Skills and education, which economists call <Term>human capital</Term>, belong among the inputs and are missing here. The standard studies that
           measure human capital from schooling and work experience move a comparable slice of the
           gap out of the residual and into the inputs. Second, a more productive country also
           builds more capital, so some of what looks like capital&rsquo;s contribution is really
