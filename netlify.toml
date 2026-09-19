@@ -1,0 +1,22 @@
+# Static build: Vite writes to dist/. Routing is hash-based, so no redirect
+# rules are needed — every route is served by index.html already.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# The service worker must never be cached, or a reader can be stuck on an old
+# version of the book indefinitely.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+# Built assets carry a content hash in their filenames, so they never change
+# under the same name and can be cached forever.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
