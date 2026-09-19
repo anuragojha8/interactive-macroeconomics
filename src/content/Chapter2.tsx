@@ -13,6 +13,7 @@ import {
   CASTELLAN_PRODUCTION,
   VERANO_DOUBLED_CAPITAL,
   VERANO_PRODUCTION,
+  VERANO_SOLOW,
 } from '../case/verano';
 import { useOverrides } from './useOverrides';
 
@@ -27,6 +28,10 @@ const doubleCapital = (overrides: Record<string, number>) => [
 
 export function Chapter2(): JSX.Element {
   const { overrides, set, reset } = useOverrides(productionModel);
+  const doubled = { ...overrides, K: (overrides.K ?? productionModel.defaults.K!) * 2 };
+  // Verano with Castellan's capital but its own productivity: the part of the
+  // gap that capital alone can close.
+  const veranoWithCastellanCapital = { ...VERANO_PRODUCTION, K: CASTELLAN_PRODUCTION.K! };
 
   return (
     <>
@@ -34,15 +39,19 @@ export function Chapter2(): JSX.Element {
         <span className="eyebrow">Chapter 2</span>
         <h1>A model of production</h1>
         <p className="lede">
-          Chapter 1 established what cannot be false. This chapter adds the first thing that can be:
-          a claim about what an economy is able to make, given what it has to work with.
+          Chapter 1 dealt in statements that cannot be false. This chapter adds the first one
+          that can: a claim about how much an economy is able to make, given what it has to work
+          with. It is a simple claim, and it turns out to explain less than most people expect,
+          which is the most useful thing about it.
         </p>
 
         <h2 id="technology">The production function</h2>
         <p>
-          A <em>production function</em> maps inputs to the most output obtainable from them. The
-          one used here combines capital and labour with an exponent on each, and multiplies the
-          result by a productivity term that stands for everything else.
+          A <em>production function</em> says how much output an economy can get from its inputs.
+          The one used here takes capital (machines, buildings, roads) and labour (people at work),
+          raises each to a power, and multiplies the result by a productivity term. That term
+          stands for everything else that makes an economy productive, which is a larger category
+          than economists like to admit.
         </p>
         <p className="callout">
           <span className="mono">
@@ -50,20 +59,22 @@ export function Chapter2(): JSX.Element {
           </span>
         </p>
         <p>
-                    The exponents are not arbitrary, and the usual argument for them is weaker than it
-          sounds. Under this form, with factors paid their marginal products, the shares of output
-          going to capital and labour equal the exponents identically, for any exponents at all.
-          Choosing one third because the observed share is one third is therefore calibration, not
-          evidence: the fit is guaranteed and says nothing about whether the form is right.
+          The exponents need defending, and the usual defence is weaker than it sounds. Under this
+          form, with each input paid what its last unit produces, the share of output going to
+          capital comes out equal to capital&rsquo;s exponent, and the same holds for labour. That
+          happens for any exponents at all. So choosing one third because capital&rsquo;s observed
+          share is about one third is calibration rather than evidence: the fit is guaranteed, and
+          it says nothing about whether the form is right.
         </p>
         <p>
-          The real argument is about constancy. Factor shares have historically moved far less than
-          the capital-labour ratio has, which is what makes an elasticity of substitution near one
-          plausible, and that is the property this form has. Even that is now contested: measured
+          The better argument is about stability. Over the last century the amount of capital per
+          worker has multiplied many times over, while the split of income between capital and
+          labour has moved far less. This form keeps the shares fixed however the inputs change,
+          which is why it fits that history. Even that argument is now under pressure. Measured
           labour shares have drifted down across most large economies since about 1980, and the
-          value depends on how the earnings of the self-employed are split between labour and
-          capital. A number this book relies on twice is one of the more actively disputed in the
-          field.
+          size of the drift depends on how you divide the earnings of the self-employed between
+          their labour and their capital. So the number this book leans on twice is one of the more
+          actively disputed in the field. It is worth knowing that before leaning on it.
         </p>
 
         <Predict
@@ -81,15 +92,13 @@ export function Chapter2(): JSX.Element {
 
         <p>
           Doubling capital raises output to{' '}
-          <Result model={productionModel} overrides={{ ...overrides, K: (overrides.K ?? productionModel.defaults.K!) * 2 }} of="Y" />. That is
-          an increase of{' '}
-          <Delta model={productionModel} from={overrides} to={{ ...overrides, K: (overrides.K ?? productionModel.defaults.K!) * 2 }}
-            of="Y"
-          />,
-                    not of 100 percent. The exponent of one third explains all of it. Each addition to the
-          capital stock produces less than the one before, because the labour it works with has not
-          changed. That is <em>diminishing returns</em>: more of one input, with the others held
-          fixed, buys progressively less.
+          <Result model={productionModel} overrides={doubled} of="Y" />, an increase of{' '}
+          <Delta model={productionModel} from={overrides} to={doubled} of="Y" />. Twice the
+          machines, nowhere near twice the output. The reason is that the new machines need people
+          to run them, and there are no new people. Each addition to the capital stock produces
+          less than the one before, because the same workforce is spread across more of it. That is{' '}
+          <em>diminishing returns</em>: add more of one input while holding the others fixed, and
+          each extra unit buys less than the last.
         </p>
 
         <ErrorBoundary label="The response of output to capital">
@@ -108,30 +117,35 @@ export function Chapter2(): JSX.Element {
 
         <p>
           Doubling capital and labour together is a different question, and the answer is exactly
-          double. The function has <em>constant returns to scale</em>: a proportional increase in
-          every input raises output in the same proportion. Diminishing returns apply to one input
-          at a time; they say nothing about scaling everything at once.
+          double. The function has <em>constant returns to scale</em>: raise every input in the
+          same proportion and output rises in that proportion too. Build a second factory
+          identical to the first, staff it the same way, and you get a second factory&rsquo;s
+          output. Diminishing returns apply to one input at a time and say nothing about scaling
+          everything at once.
         </p>
 
         <h2 id="shares">Factor payments</h2>
         <p>
-                    Under competition, each factor is paid what the last unit of it produces — its{' '}
-          <em>marginal product</em>. The return on capital equals the marginal product of capital,
-          the wage equals the marginal product of labour, and both follow from the production
-          function rather than from any bargaining story.
+          Now the question of who gets paid what. Under competition, each input is paid its{' '}
+          <em>marginal product</em>, meaning what the last unit of it adds to output. The rental
+          rate on capital equals the marginal product of capital, and the wage equals the marginal
+          product of labour. Neither needs a story about bargaining. Both fall straight out of the
+          production function once competition is assumed.
         </p>
         <p>
-          Those payments exhaust output exactly. Not approximately — exactly, at every combination
-          of inputs, as the invariant panel confirms while any slider moves. There is no residual
-          left over to fight about and no shortfall to fund. The result is a mathematical property
-          of constant returns rather than a claim about fairness, and it is worth being precise
-          about which of those it is.
+          Those payments use up output exactly, at every combination of inputs, and the invariant
+          panel confirms it while any slider moves. Nothing is left over to fight about and nothing
+          is missing that someone has to fund. Wage negotiations happen anyway, which tells you
+          something about how far to trust the assumption. The exact fit itself is a mathematical
+          property of constant returns, and it says nothing about fairness. It is worth being
+          precise about which of those two things it is.
         </p>
         <p>
-          The competitive assumption is doing real work here and it is contestable. Where employers
-          face little competition for workers, wages fall below the marginal product, and the
-          shortfall shows up as profit. The arithmetic above then still holds; what fails is the
-          identification of the wage with the marginal product.
+          The competitive assumption is doing real work here, and it can be contested. Where a few
+          employers dominate a local job market, wages sit below the marginal product and the
+          difference shows up as profit. The arithmetic above still holds in that case. What fails
+          is the step that equates the wage with the marginal product, and nothing in the accounts
+          can detect the failure, because nobody observes the marginal product directly.
         </p>
 
         <ErrorBoundary label="The causal trace">
@@ -146,9 +160,10 @@ export function Chapter2(): JSX.Element {
 
         <h2 id="development">Development accounting</h2>
         <p>
-          Output per worker differs across countries by a factor of about thirty. Capital enters
-          output through a cube root. Explaining a gap that size with capital alone therefore needs
-          a capital gap of thirty cubed, which is{' '}
+          Here is where the model earns its keep. Output per worker in the richest countries is
+          thirty times or more what it is in the poorest. Could capital explain that? Capital
+          enters output through a cube root, so a thirtyfold gap in output would need a gap in
+          capital per worker of thirty cubed, which is{' '}
           <Delta
             model={productionModel}
             from={{ ...overrides, K: 1000, L: 1000 }}
@@ -167,7 +182,7 @@ export function Chapter2(): JSX.Element {
             of="k"
             as="ratio"
           />{' '}
-          times the capital per worker of another has only{' '}
+          times the capital per worker of another gets only{' '}
           <Delta
             model={productionModel}
             from={{ ...overrides, K: 1000, L: 1000 }}
@@ -176,40 +191,47 @@ export function Chapter2(): JSX.Element {
             as="times"
             digits={0}
           />{' '}
-          its output per worker.           Capital accounts for part of the gap in living standards, and the rest sits in the
-          productivity term. That term is a residual, which makes it a measure of what the model
-          does not explain rather than a thing the model has found.
+          its output per worker. Capital accounts for part of the gap in living standards, and
+          the rest lands in the productivity term. That term is a residual: whatever is left after
+          the inputs have been counted. It measures what the model fails to explain rather than
+          something the model has found. The economist Moses Abramovitz called it a measure of our
+          ignorance in 1956, and the description has aged well.
         </p>
         <p>
-          Two cautions about that residual, both of which cut against the reading this chapter
-          invites. It is not all technology. Human capital belongs among the inputs and is missing here, and
-          the standard decompositions that measure it — from schooling and from returns to
-          experience — move a comparable slice out of the residual and into the factors. And
-          because a more productive country accumulates more capital, some of what looks like
-          capital&rsquo;s contribution is productivity arriving by another route. The honest
-          summary is that capital intensity is the smallest of the three parts, human capital is
-          comparable to it, and productivity is the largest without being the whole.
+          Two cautions about that residual, and both cut against the reading this chapter invites.
+          First, it includes more than technology. Skills and education, which economists call
+          human capital, belong among the inputs and are missing here. The standard studies that
+          measure human capital from schooling and work experience move a comparable slice of the
+          gap out of the residual and into the inputs. Second, a more productive country also
+          builds more capital, so some of what looks like capital&rsquo;s contribution is really
+          productivity arriving by another route. The fair summary is that capital per worker is
+          the smallest of the three parts, human capital is comparable to it, and productivity is
+          the largest without being the whole story.
         </p>
         <p>
-          That residual is the subject of most of modern growth economics. Naming it{' '}
-          <MathText latex="\bar{A}" /> does not explain it.
+          That residual is the subject of most of modern growth economics. Calling it{' '}
+          <MathText latex="\bar{A}" /> gives it a name, which is a start.
         </p>
 
         <div className="breakit">
           <span className="eyebrow">Break it</span>
           <p>
-                        Raise the capital exponent to 1 while leaving labour at two thirds. The exponents now
-            sum to more than one, and factor payments come to five thirds of output: the economy
-            pays out more than it makes. Two invariants fail together, and the model reports that
-            its accounting no longer closes.
+            Raise the capital exponent to 1 while leaving labour&rsquo;s where it is. The exponents
+            now sum to more than one, and the payments stop adding up: capital&rsquo;s share of
+            output comes to{' '}
+            <Result model={productionModel} overrides={{ ...overrides, alphaK: 1 }} of="capitalShare" />{' '}
+            and labour&rsquo;s to{' '}
+            <Result model={productionModel} overrides={{ ...overrides, alphaK: 1 }} of="labourShare" />
+            . The economy pays out more than it makes. Two invariants fail together, and the model
+            reports that its accounting no longer closes.
           </p>
           <p>
-            A capital exponent of one is not only an error to be caught. It is the knife edge at
-            which capital stops running into diminishing returns, and growth becomes something an
-            economy can choose rather than something it converges to. Whether the exponent on capital broadly defined — including the human kind — is nearer
-            one third or nearer one is a live dispute. It has a direct policy consequence: whether
-            subsidising investment raises a country&rsquo;s growth rate permanently, or only its
-            level.
+            That setting is also more interesting than a mistake. At an exponent of one, capital
+            stops running into diminishing returns, and growth becomes something an economy can
+            choose rather than something it settles into. Whether the exponent on capital broadly
+            defined, human capital included, is nearer one third or nearer one is a live dispute
+            with a direct policy consequence. It decides whether subsidising investment raises a
+            country&rsquo;s growth rate permanently, or only its level.
           </p>
           <button type="button" onClick={() => set('alphaK', 1)}>
             set <MathText latex="\alpha_K" /> = 1
@@ -227,16 +249,31 @@ export function Chapter2(): JSX.Element {
           question="Verano's opposition proposes borrowing enough to double the capital stock. How much larger would output be, and would it close the gap with Castellan?"
         >
           <p>
-                      Verano has two million workers — the panels count them in thousands — and a capital stock
-          of <Result model={productionModel} overrides={VERANO_PRODUCTION} of="K" /> billion veral.
-          Castellan, the neighbour across the strait, has the same workforce and eight times the
-          capital per worker. Castellan&rsquo;s output per worker is four times Verano&rsquo;s, and the
-            proposal treats that as an investment problem.
+            Verano has two million workers (the panels count them in thousands) and a capital
+            stock of <Result model={productionModel} overrides={VERANO_PRODUCTION} of="K" /> billion
+            veral. Castellan, the neighbour across the strait, has the same workforce and{' '}
+            <Delta
+              model={productionModel}
+              from={VERANO_PRODUCTION}
+              to={CASTELLAN_PRODUCTION}
+              of="k"
+              as="ratio"
+            />{' '}
+            times the capital per worker. Its output per worker is{' '}
+            <Delta
+              model={productionModel}
+              from={VERANO_PRODUCTION}
+              to={CASTELLAN_PRODUCTION}
+              of="y"
+              as="ratio"
+            />{' '}
+            times Verano&rsquo;s. The opposition has looked at those two facts, put them together,
+            and concluded that Verano&rsquo;s problem is a shortage of machines.
           </p>
-
-                    <p>
-            The output figure below is not a new assumption. It is the same number Chapter 1 reached
-            by adding up what Verano spent, arrived at here from what Verano has to work with.
+          <p>
+            One check before the numbers. Verano&rsquo;s output below comes from what the country
+            has to work with, and it matches the figure Chapter 1 reached by adding up what Verano
+            spent. Two routes, one number: the model is consistent with the accounts.
           </p>
 
           <CaseFigures
@@ -260,8 +297,9 @@ export function Chapter2(): JSX.Element {
           />
 
           <p>
-            Doubling the capital stock is a large undertaking for an economy this size. Diminishing
-            returns decide what it buys.
+            Doubling the capital stock is an enormous undertaking for an economy this size, the
+            kind of project that gets a ribbon-cutting ceremony every week for a decade. Diminishing
+            returns decide what it actually buys.
           </p>
 
           <CaseAnswer>
@@ -290,43 +328,67 @@ export function Chapter2(): JSX.Element {
                 to={VERANO_DOUBLED_CAPITAL}
                 of="MPK"
               />
-                            . The gap with Castellan barely narrows. Capital was never most of it. Castellan
-              holds eight times the capital per worker, which through a cube root accounts for a
-              factor of two. The remaining factor of two is productivity, and the fund buys none of
-              it. Note that the split is set by the calibration rather than discovered by it.
+              . The gap with Castellan barely narrows, because capital was never most of it. Give
+              Verano all of Castellan&rsquo;s capital and, through the cube root, output per worker
+              rises only{' '}
+              <Delta
+                model={productionModel}
+                from={VERANO_PRODUCTION}
+                to={veranoWithCastellanCapital}
+                of="y"
+                as="ratio"
+              />{' '}
+              times. The remaining factor of{' '}
+              <Delta
+                model={productionModel}
+                from={veranoWithCastellanCapital}
+                to={CASTELLAN_PRODUCTION}
+                of="y"
+                as="ratio"
+              />{' '}
+              is productivity, and the fund buys none of it. That split comes from the calibration,
+              so treat it as an illustration of the method rather than a finding about Verano.
             </p>
             <p>
-              Two different questions have been run together, and they have different answers. Does
-              the fund pay? On these figures, yes, and handsomely: the rental rate on Veranese
-              capital is{' '}
-              <Result model={productionModel} overrides={VERANO_PRODUCTION} of="MPK" />, against a
-              depreciation rate of six percent, so the net return comfortably exceeds anything
-              Verano would plausibly borrow at. Does it close the gap with Castellan? No, and it
-              cannot.
+              Two questions have been run together here, and they have different answers. Does the
+              fund pay? On these figures, yes, and handsomely: Veranese capital earns{' '}
+              <Result model={productionModel} overrides={VERANO_PRODUCTION} of="MPK" /> a year
+              before wear and tear, against a depreciation rate of{' '}
+              <span className="mono result">{(VERANO_SOLOW.d! * 100).toFixed(0)}%</span>, which
+              leaves a net return well above anything Verano could plausibly borrow at. Does it
+              close the gap with Castellan? No, and it cannot.
             </p>
             <p>
-              Those numbers raise a harder question the chapter has now walked into. Capital in
-              Verano earns{' '}
+              Those numbers lead somewhere awkward. Capital in Verano earns{' '}
               <Result model={productionModel} overrides={VERANO_PRODUCTION} of="MPK" /> and capital
               in Castellan earns{' '}
               <Result model={productionModel} overrides={CASTELLAN_PRODUCTION} of="MPK" />. If a
-              unit of capital earns twice as much on the poorer side of the strait, why has it not
-              already moved there? Whatever the answer is, it is the same residual that the fund
+              unit of capital earns{' '}
+              <Delta
+                model={productionModel}
+                from={CASTELLAN_PRODUCTION}
+                to={VERANO_PRODUCTION}
+                of="MPK"
+                as="ratio"
+              />{' '}
+              times as much on the poorer side of the strait, why has Castellan&rsquo;s money not
+              already crossed it? Whatever stops it is probably part of the same residual the fund
               cannot buy.
             </p>
             <p>
-              The proposal is not worthless. It is mis-specified. It targets the input that
-              explains half the gap and costs the most, while the other half sits in a residual the
-              model does not explain. What that residual contains — institutions, education,
-              technology, the allocation of capital across firms rather than its quantity — is the
-              subject of the chapters after this one.
+              So the proposal has value, aimed at the wrong target. It goes after the input that
+              explains the smaller part of the gap and costs the most to acquire, while the larger
+              part sits in a residual the model does not explain. What that residual contains
+              (institutions, education, technology, and how well capital is allocated across firms
+              rather than how much of it there is) is the subject of the chapters after this one.
             </p>
           </CaseAnswer>
         </CaseFile>
 
         <p>
-          Nothing in this chapter changes over time. Capital is whatever it was set to, permanently,
-          because no relation alters it. Chapter 3 adds the relation that does.
+          Nothing in this chapter changes over time. Capital stays wherever it was set, because no
+          relation alters it. Chapter 3 adds the relation that does, and with it the first model
+          that has a history.
         </p>
       </main>
 

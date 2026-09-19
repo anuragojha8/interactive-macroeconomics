@@ -123,9 +123,9 @@ const invariants: Invariant[] = [
     check: (s) => ({ lhs: s('assets'), rhs: s('funding') }),
     tolerance: 1e-12,
     why:
-      'Not a rule of accounting practice — a consequence of how the two sides are ' +
-      'defined. Every asset had to be funded by someone. Change one entry and ' +
-      'something else must move, which is the whole lesson of this chapter.',
+      'Every transaction is recorded twice, once for what the business owns and once for ' +
+      'how it was paid for, so every asset has a source of funding. Change one entry on its ' +
+      'own and the books stop balancing, which is exactly the error the system exists to catch.',
   },
 ];
 

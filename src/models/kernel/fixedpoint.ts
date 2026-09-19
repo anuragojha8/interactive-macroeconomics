@@ -61,7 +61,7 @@ const variables: Variable[] = [
     kind: 'parameter',
     domain: { min: 0.1, max: 1, step: 0.1 },
     introducedIn: 'ch0-kernel#clearing',
-    gloss: 'How long one round of haggling takes.',
+    gloss: 'How long one round of price-setting takes.',
   },
   {
     id: 'D',

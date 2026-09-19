@@ -142,8 +142,8 @@ const constantRule: Relation = {
   unitCheck: () => u(DIMENSIONLESS).mul(u(DEGREE_PER_MIN)),
   because: 'The heater runs at half power no matter what the room is doing.',
   arguable:
-    'It ignores the target entirely. Every open-loop policy is this rule: set the instrument ' +
-      'and accept wherever the system lands. Nothing in the rule refers to the target at all.',
+    'It ignores the target entirely. Every open-loop policy works this way: set the ' +
+      'instrument and accept wherever the system lands.',
 };
 
 /** Baseline: no feedback at all. */
@@ -174,8 +174,9 @@ export const thermostatBangBangModel: Model = extendModel(thermostatConstantMode
       unitCheck: () => u(DEGREE_PER_MIN),
       because: 'Full power while the room is below target, nothing once it is above.',
       arguable:
-        'It can only ever be wrong in one direction at a time, so it never rests — ' +
-        'it hunts around the target forever. Most household thermostats do exactly this.',
+        'It is always wrong in one direction or the other, so it never rests and hunts around ' +
+        'the target forever. Most household thermostats work this way, with a small deadband ' +
+        'so the boiler does not click on and off every minute.',
     },
   ],
 });
@@ -194,8 +195,8 @@ export const thermostatProportionalModel: Model = extendModel(thermostatConstant
       because: 'The further from target, the harder the heater works.',
       arguable:
         'It settles short of the target and stays there: at the target the rule ' +
-        'asks for no heat, but the room is still leaking. Steady-state error is not ' +
-        'a bug in the thermostat, it is what this rule does.',
+        'asks for no heat, but the room is still leaking. Engineers call the gap steady-state ' +
+        'error, and every thermostat running this rule has it.',
     },
   ],
 });

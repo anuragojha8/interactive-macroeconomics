@@ -193,7 +193,7 @@ const invariants: Invariant[] = [
     why:
       'Chapter 1’s expenditure identity, with government purchases and net exports set to ' +
       'zero as a modelling restriction. Consumption is derived as the residual, so this holds ' +
-      'whatever rule sets investment \u2014 change the investment rule and the accounting survives.',
+      'whatever rule sets investment. Change the investment rule and the accounting survives.',
   },
 ];
 

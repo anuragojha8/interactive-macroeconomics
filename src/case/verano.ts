@@ -100,31 +100,31 @@ export const VERANO_BRIEFING: CaseClaim[] = [
   },
   {
     id: 'v-saving',
-    latex: '\\text{Households set aside } 18\\% \\text{ of income}',
+    latex: '\\text{Households will keep setting aside } 18\\% \\text{ of income}',
     answer: 'assumption',
     because:
-      'A claim about what Veranese households choose. It could have been any figure, and it will move when interest rates or expectations move.',
+      'Last year\u2019s figure is a measurement. Assuming it holds next year is a claim about what Veranese households will choose, and it will move when interest rates or expectations move.',
   },
   {
-    id: 'v-deficit',
-    latex: 'S_p + S_g - I = NX',
+        id: 'v-debt',
+    latex: '\\text{Debt at year end} = \\text{Debt at year start} + \\text{Deficit}',
     answer: 'accounting',
     because:
-      'Follows from the expenditure identity and the definitions of saving. The minister may dispute the cause of the deficit but not this equation.',
+      'A stock and a flow, straight from the bathtub. The minister may argue about why the deficit is so large, but not about where it goes.',
   },
   {
     id: 'v-investment',
-    latex: '\\text{Firms invest more when } r \\text{ is higher}',
+    latex: '\\text{Firms invest more when the return on capital is higher}',
     answer: 'assumption',
     because:
-      'A statement about how Veranese firms respond to the return on capital. Plausible, widely assumed, and not true by construction.',
+      'A claim about how Veranese firms respond to what capital earns. Plausible, widely assumed, and not true by construction. A higher cost of borrowing would push the other way.',
   },
   {
     id: 'v-spending',
     latex: '\\text{Verano\u2019s imports are somebody\u2019s exports}',
     answer: 'accounting',
     because:
-      'Two names for one transaction. The arrows have two ends, which is the whole content of the circular flow.',
+      'Two names for one transaction. Every sale across a border has a buyer on one side and a seller on the other.',
   },
   {
     id: 'v-wages',

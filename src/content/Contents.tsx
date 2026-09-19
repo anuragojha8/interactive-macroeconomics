@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { CHAPTERS } from '../book';
 import { loadProgress } from '../state/progress';
+import { VERANO_PLAN_RATE, VERANO_SOLOW } from '../case/verano';
 
 const PRIMITIVES: Record<string, string> = {
   P1: 'stocks & flows',
@@ -22,20 +23,24 @@ export function Contents(): JSX.Element {
       <span className="eyebrow">Part I</span>
       <h1>One economy, five primitives</h1>
       <p className="lede">
-                Every chapter in this book adds relations to a single engine. Nothing is asserted here
-        that cannot be run, shocked, and traced back to the assumption that produced it.
+        This book builds one small economy, piece by piece, inside a simulator you can take apart.
+        Every chapter adds a few relations to the same engine, and every claim in the text can be
+        run, pushed and traced back to the assumption that produced it. If a sentence and the
+        simulator ever disagree, trust the simulator and tell the author.
       </p>
 
       <div className="caseintro">
         <span className="eyebrow">The case of Verano</span>
         <p>
-          A single case runs through every chapter. Verano is a middle-income island economy of two
-          million workers, debating a National Investment Plan that would raise its investment rate
-          by ten points of output. Each chapter ends by answering the part of that debate its own
-                    tools can reach, and no part can be answered with the chapter before it.
+          One case runs through every chapter. Verano is a middle-income island economy of two
+          million workers, and its government is debating a National Investment Plan that would raise
+          the share of output it invests by{' '}
+          {Math.round((VERANO_PLAN_RATE - VERANO_SOLOW.s!) * 100)} points. Each chapter ends by
+          answering the part of that debate its own tools can reach. No part can be answered with
+          only the chapters before it, which is roughly how real policy debates feel.
         </p>
         <p className="caseintro__note">
-                    Verano is invented, and its figures are a calibration rather than a set of facts. Its
+          Verano is invented, and its figures are a calibration rather than a set of facts. Its
           accounts are in billions of veral and its workforce in thousands, which is how the panels
           read them. Every number in the case is computed from that calibration by the same engine
           that runs the chapters.

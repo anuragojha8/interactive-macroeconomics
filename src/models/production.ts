@@ -209,7 +209,7 @@ const relations: Relation[] = [
         arguable:
       'That output depends on capital and labour through this form, with constant exponents. ' +
       'The exponents are read off observed factor shares, which equal the elasticities only if ' +
-      'factors are paid their marginal products \u2014 so this assumption and the competitive one ' +
+      'factors are paid their marginal products, so this assumption and the competitive one ' +
       'below are not independent, and the evidence for the form is weaker than it looks.',
     citation: 'Jones 5e, ch. 4',
   },
@@ -266,8 +266,8 @@ const relations: Relation[] = [
     because: 'Competition bids the wage up to what the last worker produces.',
         arguable:
       'Assumes employers compete for workers. Where a few employers dominate a local labour ' +
-      'market the wage sits below the marginal product, and the difference is kept as profit ' +
-      '\u2014 which the arithmetic here cannot detect, because it never observes the marginal ' +
+      'market the wage sits below the marginal product, and the difference is kept as profit. ' +
+      'The arithmetic here cannot detect that, because it never observes the marginal ' +
       'product independently of the wage.',
     citation: 'Jones 5e, ch. 4',
   },

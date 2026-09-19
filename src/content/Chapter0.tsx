@@ -23,69 +23,74 @@ const SORT_ITEMS = [
     id: 'expenditure',
     latex: 'Y = C + I + G + NX',
     answer: 'accounting' as const,
-    because: 'Every unit of output was bought by somebody. The equation defines how the total is assembled.',
+    because:
+      'Everything produced was bought by someone: a household, a firm, the government, or a foreigner. The equation is just the list, added up. (Unsold goods count too, as investment in inventory, which is the accounting trick that keeps it exact.)',
   },
   {
     id: 'consumption',
     latex: 'C = (1 - \\bar{s})Y',
     answer: 'assumption' as const,
-    because: 'Households could set aside any fraction they liked. A constant one is a claim about behaviour.',
+    because:
+      'People could spend any share of their income they liked. Saying they always spend the same share is a claim about behaviour, and a strong one.',
   },
   {
     id: 'balance',
     latex: 'A = L + E',
     answer: 'accounting' as const,
-    because: 'Equity is defined as assets less liabilities, so the equation cannot fail.',
+    because:
+      'Every transaction is recorded twice, once where the money came from and once where it went. Keep the books that way and they balance by construction.',
   },
   {
     id: 'investment',
     latex: 'I = \\bar{s}Y',
     answer: 'assumption' as const,
-    because: 'The same claim as the consumption rule, stated from the other side.',
+    because: 'The same claim as the consumption rule, seen from the other side of the ledger.',
   },
   {
     id: 'rental',
     latex: 'r = MPK',
     answer: 'assumption' as const,
-    because: 'True under competition. Where firms have market power, factors are paid less than their marginal product.',
+    because:
+      'True when markets are competitive. Where firms have pricing power, capital is paid less than it produces and the difference shows up as profit.',
   },
-    {
+  {
     id: 'accumulation',
     latex: 'K_{t+1} = K_t + I_t - D_t',
     answer: 'accounting' as const,
     because:
-      'Given what investment and depreciation mean, next period’s stock follows. All the behaviour sits in what sets I and D.',
+      'Next year’s capital is this year’s, plus what was built, minus what wore out. All the behaviour hides in whatever decides I and D.',
   },
   {
     id: 'depreciation',
     latex: 'D_t = \\bar{d}K_t',
     answer: 'assumption' as const,
     because:
-      'Constant geometric depreciation is a modelling choice, and a poor one for many assets. Buildings, vehicles and software do not wear out on the same schedule.',
+      'A fixed share wearing out every year is a modelling convenience. Houses, cars and laptops age on very different schedules, as anyone who has owned all three can confirm.',
   },
   {
     id: 'demand',
     latex: 'D = a - b\\,p',
     answer: 'assumption' as const,
-    because: 'A claim about how buyers respond to price, and a strong one: the response is linear.',
+    because: 'A claim about how buyers respond to price, and a bold one: that the response is a straight line.',
   },
   {
     id: 'per-worker',
     latex: 'y = Y / \\bar{L}',
     answer: 'accounting' as const,
-    because: 'A definition. Output per worker is output divided by workers, and nothing else.',
+    because: 'A definition. Output per worker is output divided by workers.',
   },
   {
     id: 'net-lending',
     latex: 'S_p + S_g - I = NX',
     answer: 'accounting' as const,
-    because: 'Follows from the expenditure identity and the definitions of saving. It constrains every explanation of a trade deficit.',
+    because:
+      'It falls straight out of the spending identity and the definitions of saving. Any story about a trade deficit has to fit through this equation.',
   },
   {
     id: 'thermostat',
     latex: 'h = h_{max} \\text{ if } T < T^*',
     answer: 'assumption' as const,
-    because: 'A control rule. The physics of the room is unaffected by which rule is chosen.',
+    because: 'A control rule, which someone chose. The physics of the room is the same whichever rule is picked.',
   },
 ];
 
@@ -124,30 +129,38 @@ export function Chapter0(): JSX.Element {
         <span className="eyebrow">Chapter 0</span>
         <h1>The Kernel</h1>
         <p className="lede">
-          Macroeconomics is usually taught as a collection of diagrams to be recognised. It is
-          smaller than that. Five ideas generate everything in this book, and none of them is about
-          economics.
+          Most people meet macroeconomics as a pile of diagrams: curves that shift for reasons
+          nobody quite explains, memorised before an exam and forgotten soon after. This book makes a
+          different bet. Underneath all those diagrams sit five ideas, and none of them is really
+          about economics. If you have written software, you have already used every one.
         </p>
 
         <p>
           The five are stocks and flows, accounting identities, budget constraints, behavioural
-          rules, and market clearing. Each appears below in a system with no money in it. The
-          variables come later. Once the machinery is familiar, the economics is a matter of naming
-          them.
+          rules, and market clearing. This chapter introduces each one in a setting with no money in
+          it at all: a bathtub, a lemonade stand, a thermostat and a market searching for its
+          price. Once the machinery feels ordinary, the economics is mostly a question of which
+          rules to believe.
         </p>
 
         <h2 id="stocks">Stocks and flows</h2>
         <p>
-          A <em>stock</em> is a quantity measured at a moment: water in a tub, capital in an
-          economy, money in an account. A <em>flow</em> is a quantity measured per unit of time: the
-          tap,           annual investment, monthly salary. The distinction is not pedantry. A debt is a stock and
-          a deficit is a flow, and most of what goes wrong in public argument about either comes
-          from adding them together.
+          Start with the bathtub. The water in it is a <em>stock</em>, a quantity you measure at a
+          single moment, like a snapshot. The tap is a <em>flow</em>, a quantity you can only
+          measure over a stretch of time, like a video. Your bank balance is a stock and your salary
+          is a flow. In an economy, capital is a stock and investment is a flow.
         </p>
         <p>
-          The tub below fills from a tap and drains in proportion to how full it is. Raise the tap
-          and the level rises, but not without limit: a fuller tub drains faster, and the level
-          settles where the two flows match.
+          This sounds like a distinction only a pedant could love, right up until you watch a
+          televised debate about government debt. Debt is a stock. The deficit is a flow: roughly
+          how much the debt grows this year. The two get swapped on air with impressive
+          regularity. A minister promises to cut the deficit, the audience hears a promise to cut
+          the debt, and next year the debt is bigger anyway. A smaller deficit only means the debt
+          grows more slowly.
+        </p>
+        <p>
+          The tub below fills from a tap and drains through a plughole, and the fuller it gets, the
+          faster it drains. Open the tap wider and watch the level. It rises, but not forever.
         </p>
 
         <ErrorBoundary label="The bathtub">
@@ -167,26 +180,42 @@ export function Chapter0(): JSX.Element {
         />
 
         <p>
-                    That resting level is not a discovery about tubs. It is the arithmetic of that particular
-          drain rule: the level settles at inflow divided by the drain rate, and the same arithmetic
-          governs a capital stock, a population, a debt and an inventory. Change the rule — a real
-          plughole drains closer to the square root of the depth — and the resting level moves, but
-          the reason there is one does not.
+          The level settles where the water leaving matches the water arriving, at the inflow
+          divided by the drain rate. Check it against the sliders. The same arithmetic runs a
+          subscription business: win 1,000 customers a month, lose 5% of the base each month, and
+          the base levels off at 20,000 however long you wait. It also decides where a capital
+          stock settles, and where a country’s debt settles as a share of its income.
+        </p>
+        <p>
+          A caveat. A real plughole drains roughly with the square root of the depth, as Torricelli
+          worked out in the 1640s, rather than in proportion to it. Change the rule and the resting level moves; that there is a resting level at all
+          stays put. Most of this book works like that: the exact numbers depend on assumptions, and
+          the shape of the answer usually does not.
         </p>
 
         <h2 id="identities">Identities and budget constraints</h2>
         <p>
-          An <em>identity</em> is an equation that holds by construction, because of how its terms
-          are defined. It cannot be tested, refuted, or repealed. A <em>budget constraint</em> is
-          the identity that sources of funds equal uses of funds, applied to one party over one
-          period.
+          An <em>identity</em> is an equation that holds because of how its terms are defined. You
+          cannot test it, refute it, or repeal it, however much a finance minister might like to.
+          A <em>budget constraint</em> is the everyday version. Over any period, the money
+          coming into a household, a firm or a government equals the money going out, once
+          borrowing and saving are counted. A government that spends more than it collects in
+          taxes must borrow the difference, and that borrowing is what adds to the debt. The
+          bathtub and the budget are the same arithmetic, seen from two sides.
         </p>
         <p>
-                    The books below belong to a lemonade stand. Assets equal liabilities plus equity because
-          every transaction is recorded twice, once as a source of funds and once as a use, so a
-          single-sided edit is not a change to the business but a bookkeeping error.           Change one entry. The identity does not fail — it cannot — so the books stop balancing
-          instead, and the panel lists the changes that would each make them balance again. There is
-          always more than one.
+          The books below belong to a lemonade stand. Assets equal liabilities plus equity, because
+          every transaction gets recorded twice: once where the money came from, and once where it
+          went. Keep the books that way and they balance by construction. Italian merchants had the
+          system running by the fourteenth century. It works like a checksum: it cannot tell you
+          the numbers are right, but it will tell you when half of a transaction has gone
+          missing.
+        </p>
+        <p>
+          Now break it on purpose. Change a single entry, the way a clerk might record a sale and
+          forget the cash. The books stop balancing, and the panel lists each single entry that
+          would bring them back. There is always more than one, and nothing in the arithmetic says
+          which is right. Chapter 1 turns that same fact on a country’s trade deficit.
         </p>
 
         <ErrorBoundary label="The ledger">
@@ -195,13 +224,16 @@ export function Chapter0(): JSX.Element {
 
         <h2 id="rules">Behavioural rules</h2>
         <p>
-          A <em>behavioural rule</em> states what somebody does. It is the only kind of statement in
-          a model that can be wrong, and therefore the only kind worth arguing about.
+          A <em>behavioural rule</em> describes what somebody chooses to do: how much a family saves,
+          how fast a firm hires, how a central bank sets interest rates. Rules are where a model makes
+          its claims about the world, so they are where it is most often wrong and the part most
+          worth arguing about. When two economists disagree, check the rules first. The accounting
+          is rarely where the disagreement lives.
         </p>
         <p>
-          Three thermostats follow. The room is identical in all three. Heat leaks in proportion to the gap between inside
-                    and outside, and that relation is literally the same one in all three models. Only the
-          control rule differs.
+          Here are three thermostats in three identical rooms. Heat leaks out in proportion to the
+          gap between inside and outside, and that physics is the same code in all three.
+          The only thing that differs is the rule the thermostat follows.
         </p>
 
         <div className="charts charts--three">
@@ -221,28 +253,37 @@ export function Chapter0(): JSX.Element {
         </div>
 
         <p>
-          Constant heat ignores the target and holds the room at whatever temperature balances the
-          leak. On/off control never rests; it overshoots, switches off, undershoots, and repeats.
-          Proportional control settles short of the target and stays there, because at the target it
-          calls for no heat while the room is still losing some. That gap is not a fault in the
-          thermostat. It is what the rule does.
+          Constant heat ignores the target altogether
+          and parks the room wherever the heater and the leak happen to balance. On/off control
+          never rests: it overshoots, switches off, undershoots and starts again, the way most
+          household thermostats do. Proportional control settles short of the target and stays
+          there. Right at the target it asks for no heat while the room is still losing some, so
+          it parks where the heat it asks for matches the leak. Engineers call that gap
+          steady-state error, and it comes with the rule rather than with a faulty thermostat.
+          Central bank rules carry a “neutral” interest rate for a similar reason: it is the
+          setting meant to hold the economy steady when everything is on target. Nobody can
+          observe it directly, which is why it is argued over so much.
         </p>
         <p>
-                    Every monetary and fiscal rule later in this book has one of these three shapes. Swapping
-          the rule changes what the system does without changing anything else in it.
+          Hold on to these three shapes. Most policy rules later in the book are versions of one of
+          them. In each
+          case the economy underneath stays the same, and the rule changes what happens to it.
         </p>
 
         <h2 id="clearing">Market clearing</h2>
         <p>
-          <em>Market clearing</em> means a price at which the quantity demanded equals the quantity
-          supplied. Stated that way it is a definition. Stated as something that happens, it is an
-          assumption about a process — that a price which is too low gets bid up, repeatedly, until
-          the gap closes.
+          A market <em>clears</em> when the quantity buyers want equals the quantity sellers offer
+          at the going price. Stated that way it is a definition. Stated as something that actually
+          happens, it is an assumption about a process: a price that is too low gets bid up, round
+          after round, until the shortage disappears.
         </p>
         <p>
-          That process is a fixed-point search. Below, the price moves each round in proportion to
-          excess demand. Raise the adjustment speed past a threshold and the search overshoots by
-          more than it corrects, and the price never settles at all.
+          In software terms that process is a fixed-point search, and if you have trained a model
+          you have seen it fail. In the market below, the price moves each round in proportion to
+          excess demand, much as gradient descent moves a weight in proportion to the gradient. A
+          small step homes in on the right price. Past a threshold, each correction overshoots by
+          more than the error it was fixing, just as a learning rate set too high makes the loss
+          explode.
         </p>
 
         <ErrorBoundary label="The market">
@@ -259,12 +300,18 @@ export function Chapter0(): JSX.Element {
         <div className="breakit">
           <span className="eyebrow">Break it</span>
           <p>
-                        Set the adjustment speed to 0.5. Each correction is now larger than the error it
-            corrects, the swings grow, and within a few rounds the search asks for a negative price
-            and the run stops. Market clearing is an assumption about how fast prices adjust
-            relative to how sharply quantities respond. Above the threshold, the process this chapter described never arrives anywhere.
+            From the default settings, set the adjustment speed to 0.5. Each correction now overshoots the error it corrects,
+            the swings grow, and within a few rounds the search asks for a negative price and the
+            run stops. When people say markets clear, they are quietly assuming prices adjust at a
+            sensible speed relative to how sharply buyers and sellers respond. Above the threshold,
+            the market never finds its price. Managers can do this without any maths: reprice hard
+            on last week’s sales, or order capacity off this quarter’s shortage, and you can create
+            the very swing you meant to remove.
           </p>
-          <button type="button" onClick={() => market.set('lambda', 0.5)}>
+          <button type="button" onClick={() => {
+              market.reset();
+              market.set('lambda', 0.5);
+            }}>
             set <MathText latex="\lambda" /> = 0.5
           </button>
           <button type="button" onClick={market.reset}>
@@ -274,22 +321,25 @@ export function Chapter0(): JSX.Element {
 
         <h2 id="sorting">Which is which</h2>
         <p>
-                    Of everything in this chapter, one distinction does the most work: whether a statement is
-          true by construction, or is a claim about how somebody behaves. An identity constrains any
-          account of the data and takes no defending. A behavioural rule is a claim someone could
-          dispute, and disputing it is how economics makes progress.
+          If you take one habit from this chapter, take this one. For any statement about
+          the economy, ask whether it is true by construction or a claim about how somebody
+          behaves. An
+          identity constrains every possible explanation and needs no defending. A behavioural rule
+          is a claim someone could dispute, and disputing those claims is how economics makes
+          progress.
         </p>
         <p>
-                    Eleven equations follow, drawn from across the book. Each is either true by construction
-          or a claim someone could dispute. Several use notation from chapters not yet read, which
-          does not matter: sorting them does not require knowing what the symbols mean.
+          Here are eleven equations from across the book. Several use notation you have not met
+          yet, and that is deliberate. You can sort most of them from their shape alone. Two or
+          three will fool you, and those are the ones worth reading the explanation for.
         </p>
 
         <SortExercise id="ch0-sorting" items={SORT_ITEMS} />
 
         <p>
-          Every model from here on is assembled from these five pieces. Chapter 1 uses two of them
-          and no others, and gets further than that restriction suggests.
+          Every model from here on is built out of these five pieces. Chapter 1 uses only two of
+          them, identities and budget constraints, and gets far enough to say what must happen to
+          the trade balance when a government borrows more.
         </p>
 
         <CaseFile
@@ -299,20 +349,20 @@ export function Chapter0(): JSX.Element {
           question="Which of the Finance Minister's six statements could be disputed, and which could not?"
         >
           <p>
-            Verano is a middle-income island economy of two million workers. Its Finance Ministry
-            has circulated a briefing note ahead of a debate on a National Investment Plan. The note
-            mixes two kinds of statement without distinguishing them. That is normal practice. It is
-            also the source of most of the confusion in the debate that follows.
+            Meet Verano, a middle-income island economy of two million workers, most of them employed by three large firms, and the running case
+            for this book. Its government is about to debate a National Investment Plan, and the
+            Finance Ministry has circulated a briefing note ahead of the debate.
           </p>
           <p>
-                        The note mixes the two kinds without marking which is which, and that is where the
-            debate goes wrong. A line that could not be false and a line that could be are being
-            weighed as though they were the same sort of thing.
+            Like most briefing notes, it mixes two kinds of statement without saying which is
+            which. Some lines could not possibly be false. Others are really bets on how people
+            will behave. The debate that follows goes wrong exactly where those two get treated as
+            the same kind of thing. Sort them before the politicians do.
           </p>
           <SortExercise id="case-verano-briefing" items={VERANO_BRIEFING} />
           <p>
-            The three assumptions reappear in Part Four, where the plan depends on all of them at
-            once. The three identities will still be true whatever happens to Verano.
+            Keep the three assumptions in mind. By Part Four we will know which of them the plan
+            really rests on, and the answer is fewer than the Ministry thinks.
           </p>
         </CaseFile>
       </main>

@@ -1,6 +1,8 @@
 # Style guide
 
-**Version** 1.0
+**Version** 2.0 — rewritten after the first reader said the book read as though
+it had been written in a hurry. They were right, and version 1 of this guide was
+a large part of why.
 **Applies to** all prose in `src/content/`, all component copy, all captions, and
 every string in a `Relation.because` or `Invariant.why`.
 
@@ -12,25 +14,42 @@ and will abandon anything that reads as exam preparation or as marketing.
 
 ## 1. Voice
 
-Exposition is third person. The economic objects are the actors: capital
-accumulates, output depends on the capital already in place, an identity
-constrains any account of the data. This satisfies the demand for active voice
-without reaching for "we," and it is also more accurate, because the claims are
-about the economy rather than about the author.
+Write the way a senior practitioner explains something to a smart colleague from
+another field: plainly, with conviction, and with evident respect for their time.
+The closest model is Jamie Dimon's annual letters to JPMorgan shareholders — not
+for their subject, but for how they sound. What to take from them:
 
-**"We," "our," "let us," and "let's" never appear.** The collaborative voice is
-the single clearest marker of machine-written text, and it fakes a relationship
-the page cannot have.
+- **Say what you think, then why.** Open a section with its point in plain words,
+  then build the case. The reader should never have to hunt for the claim.
+- **Be candid about what is uncertain.** "Nobody knows" and "this model gets it
+  wrong" are allowed, and they make the confident sentences more credible, not
+  less.
+- **Keep the practical lens.** Tie ideas to what happens when someone is running
+  a business, reading a budget, or arguing about policy on television.
+- **Use plain words and concrete numbers.** A named example beats an abstraction.
+- **Number the lessons when there genuinely are several.** Not otherwise.
+- **Warmth without gush.** Friendly, occasionally dry, never performing.
 
-**"You" appears only in operations.** An instruction to act, a prediction to
-commit to, or an observation to make: *raise the investment rate in the panel*,
-*commit to a direction for each before the model runs*, *notice what did not
-move*. Exposition never addresses the reader. A sentence that explains something
-and a sentence that asks for an action are different kinds of sentence, and the
-grammar should make that visible.
+**"You" is welcome, and "we" where it is natural** — "if we double capital",
+"we have seen this shape before". What is banned is the chummy register that
+flatters or presumes: *let's dive in*, *you might be wondering*, *as you can
+see*, *you'll notice*, *buckle up*, *here's the thing*. The test: does the
+sentence tell the reader something, or tell the reader about themselves?
 
-No exclamation marks. No enthusiasm about the material — the material carries
-itself, and the reader can tell the difference.
+No exclamation marks.
+
+## 1a. Humour
+
+Humour is allowed and wanted, in small doses and of one kind: **dry, and drawn
+from the material itself.** The absurdity of a politician confusing a debt with a
+deficit on live television is funny *and* teaches the distinction. A pun in a
+heading teaches nothing.
+
+- Roughly one light moment per section. Two is a lot. None across a whole chapter
+  means the chapter has gone grey.
+- Never at the reader's expense, and never at a named real person's.
+- It has to be true. A joke that bends a fact is worse than no joke.
+- Never partisan. Both parties confuse stocks and flows.
 
 ## 2. Marking what is contestable
 
@@ -63,16 +82,25 @@ unknown or irrelevant.
 Most sentences run under 25 words. Long sentences earn their length by carrying a
 real subordinate clause, never by accumulating qualifications.
 
-Vary sentence length deliberately. A short sentence is emphasis, so a paragraph
-containing three of them contains none, and a paragraph that ends on one should
-have earned it. Never manufacture a short sentence to satisfy a rhythm: if the
-paragraph does not need emphasis, it does not get any. An earlier version of this
-guide required one short sentence per paragraph, and the prose filled with
-sentences like *The reason is familiar* that carried nothing and announced
-themselves coming.
+Let paragraphs breathe. Give an example before a definition, and say why an idea
+matters before asking the reader to learn it. Version 1 of this guide produced
+prose that was correct and clipped — definitions fired off like a glossary, and a
+paragraph of four sentences where six would have been kinder. Aim for about a
+quarter more words than the tightest possible version, spent on examples and on
+the reason to care, never on filler.
 
-One idea per sentence. Where two ideas are joined by "and" and neither depends on
-the other, they are two sentences.
+Vary sentence length deliberately. A short sentence is emphasis, so a paragraph
+containing three of them contains none.
+
+**Two constructions are banned outright, because they are the loudest tells of
+machine-written prose:**
+
+- **"X is not Y. It is Z."** — *"That gap is not a fault. It is what the rule
+  does."* Say what it is: *"That gap is simply what the rule does."* The
+  contrast-then-correction shape is fine once a chapter; by the third use it is a
+  tic, and version 1 used it on almost every page.
+- **Em-dash stacking.** At most one pair of em-dashes per paragraph. Commas,
+  colons and parentheses do most of the same work with less drama.
 
 ## 4. Structure
 
@@ -116,7 +144,7 @@ carelessness about precision, which is the impression this book can least afford
 
 ## 7. Limits
 
-Every section states what its model cannot say. This is not modesty. A model
+Every section states what its model cannot say, for a practical reason: a model
 whose limits are hidden teaches false confidence, and a reader who meets those
 limits later without warning will discard everything else along with them.
 
@@ -127,9 +155,13 @@ verb), furthermore, moreover, in conclusion, it is important to note, it is
 crucial to remember, at the end of the day, navigate (figuratively), unlock,
 leverage (as a verb), robust (as praise), seamless, game-changing.
 
-Never: **simply, just, obviously, of course, clearly, trivially.** These tell a
-reader who is struggling that the fault is theirs. If a step is easy, it does not
-need saying; if it is not, the word is a lie.
+Never: **obviously, of course, clearly, trivially.** These tell a reader who is
+struggling that the fault is theirs. If a step is easy, it does not need saying;
+if it is not, the word is a lie. ("Just" and "simply" are allowed when they mean
+*merely* rather than *easily*.)
+
+Never, from the chummy register: *let's dive in, let's explore, buckle up, here's
+the thing, you might be wondering, as you can see, you'll notice, spoiler alert.*
 
 Never: a closing paragraph that restates what the section already said. The
 section ends when the argument ends.
@@ -148,19 +180,16 @@ requires a caveat to survive is the wrong analogy.
 ## 10. Enforcement
 
 `npm run lint:prose` checks what a regular expression can honestly check, over
-string literals and JSX text only — a non-null assertion is not an exclamation
-mark, and `justify-content` is not the word "just".
+string literals and JSX text only.
 
-**Fails the build:** the collaborative voice, the banished vocabulary, the
-reader-blaming words, exclamation marks, and any sentence over 40 words.
+**Fails the build:** the chummy register, the banished vocabulary, the
+reader-blaming words, exclamation marks, the "X is not Y. It is Z." construction,
+more than one pair of em-dashes in a paragraph, and any sentence over 40 words.
 
 **Reported for judgement:** sentences over 25 words, paragraphs with three or more
-short sentences (emphasis spent until it is worth nothing), second person, and
-figures appearing in prose — in digits or spelled out.
-None of these can be decided mechanically. A figure may be a calibration input,
-which is allowed, or a model result, which is not; a "you" may be an instruction,
-which is allowed, or exposition, which is not. The report exists so that every
-instance is looked at rather than assumed.
+short sentences, and figures appearing in prose — in digits or spelled out. A
+figure may be a calibration input, which is allowed, or a model result, which is
+not; no regex can tell the difference.
 
 ## 11. The test
 

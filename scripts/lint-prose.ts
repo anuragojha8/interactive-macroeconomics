@@ -14,9 +14,13 @@ const EXTENSIONS = new Set(['.tsx', '.ts', '.mdx']);
 
 /** Patterns that fail the build. */
 const BANNED: Array<{ re: RegExp; why: string }> = [
-  { re: /\b(we|our|ours|us)\b/gi, why: 'the collaborative voice is banned outright (§1)' },
-  { re: /\blet['’]s\b|\blet us\b/gi, why: 'the collaborative voice is banned outright (§1)' },
-  { re: /\b(simply|just|obviously|of course|clearly|trivially)\b/gi,
+  // §1: "we" and "you" are welcome. The chummy register that flatters or
+  // presumes is not.
+  {
+    re: /\blet['’]s (dive|explore|unpack|take a (look|closer look)|get started|begin)\b|\bbuckle up\b|\bhere['’]s the thing\b|\byou (might|may) be wondering\b|\bas you can see\b|\byou['’]ll notice\b|\bspoiler alert\b/gi,
+    why: 'the chummy register (§1, §8)',
+  },
+  { re: /\b(obviously|of course|clearly|trivially)\b/gi,
     why: 'blames the reader for finding it hard (§8)' },
   { re: /\b(delve|tapestry|beacon|testament|paramount|furthermore|moreover|seamless|game-changing|robustly)\b/gi,
     why: 'banished vocabulary (§8)' },
@@ -27,7 +31,6 @@ const BANNED: Array<{ re: RegExp; why: string }> = [
 
 /** Reported, not failed — a rule a regular expression cannot decide on its own. */
 const REVIEW: Array<{ re: RegExp; why: string }> = [
-  { re: /\b(you|your|yours)\b/gi, why: 'second person: allowed only in operations (§1)' },
   {
     re: /\b\d[\d,]*(\.\d+)?\s*(percent|per cent|%|times|-fold|fold)\b/gi,
     why: 'a figure in prose: must not assert a model result (§6)',
@@ -96,6 +99,7 @@ function proseLines(source: string): Array<{ line: number; text: string; block: 
     const jsxText = raw
       .replace(/\{[^}]*\}/g, ' ')
       .replace(/<[^>]*>/g, ' ')
+      .replace(/&mdash;/g, '\u2014')
       .replace(/&[a-z]+;/g, ' ');
     if (looksLikeProse(jsxText) && !raw.includes("'") && !raw.includes('"')) {
       out.push({ line, text: jsxText, block: true });
@@ -148,6 +152,16 @@ for (const root of ROOTS) {
     const blocks = paragraphs(proseLines(source));
 
     for (const { line, text } of blocks) {
+      // §3: the contrast-then-correction tic, the loudest tell in version 1.
+      const tic = /\b(?:is|are|was|were)(?: not|n['’]t) [^.!?]{1,90}[.!?]\s+(?:It|That|This|They|These) (?:is|are|was|were)\b/.exec(text);
+      if (tic) {
+        failures.push({ file, line, text: tic[0], match: 'X is not Y. It is Z.', why: 'the contrast-then-correction tic (§3)' });
+      }
+      // §3: at most one pair of em-dashes a paragraph.
+      const dashes = (text.match(/\u2014/g) ?? []).length;
+      if (dashes > 2) {
+        failures.push({ file, line, text: text.slice(0, 90), match: `${dashes} em-dashes`, why: 'more than one pair of em-dashes in a paragraph (§3)' });
+      }
       const sentences = sentencesOf(text);
       if (sentences.length === 0) continue;
       for (const sentence of sentences) {

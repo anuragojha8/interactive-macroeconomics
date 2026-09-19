@@ -131,7 +131,7 @@ const relations: Relation[] = [
     unitCheck: () => u(MONEY_PER_YEAR).add(MONEY_PER_YEAR).add(MONEY_PER_YEAR),
     because:
       'Every unit spent is earned by someone: as wages, as operating surplus, or as tax on the ' +
-      'transaction itself. Direct taxes are not added here — they are paid out of wages and ' +
+      'transaction itself. Direct taxes are left out because they are paid out of wages and ' +
       'surplus, and adding them again would count the same income twice.',
     citation: 'Jones 5e, ch. 2',
   },
@@ -222,7 +222,7 @@ const invariants: Invariant[] = [
   {
     id: 'expenditure-equals-income',
     name: 'Spending equals earning',
-    latex: 'Y = W + \\Pi + T',
+    latex: 'Y = W + \\Pi + T_{prod}',
     check: (s) => ({ lhs: s('Y'), rhs: s('Yincome') }),
     tolerance: 1e-12,
     why:
@@ -238,7 +238,7 @@ const invariants: Invariant[] = [
     tolerance: 1e-12,
     why:
             'A trade deficit means the country invested more than it saved and borrowed the ' +
-      'difference from abroad. Before it is anything about unfair competition, it is arithmetic. ' +
+      'difference from abroad. Whatever else anyone says about it, that part is arithmetic. ' +
       'Strictly speaking the left side equals the current account, which is the trade balance ' +
       'plus net income from abroad; the two coincide only while a country owes nothing.',
     // Jones 5e, ch. 19
@@ -257,7 +257,7 @@ const invariants: Invariant[] = [
     tolerance: 1e-9,
     why:
       'One sector can only run a surplus if another runs a deficit. There is no ' +
-      'arrangement in which everybody saves more at once — the arrows have two ends.',
+      'arrangement in which everybody saves more at once. The arrows have two ends.',
   },
   {
     id: 'deflator-round-trip',

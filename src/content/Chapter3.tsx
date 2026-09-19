@@ -86,22 +86,32 @@ export function Chapter3(): JSX.Element {
   }).path!;
   const yearsToRecover = stormPath.findIndex((p) => p.K! >= VERANO_SOLOW.K!);
 
+  const pct = (x: number) => `${Math.round(x * 100)}`;
+  const planPoints = pct(VERANO_PLAN_RATE - VERANO_SOLOW.s!);
+  const stormLoss = pct(1 - VERANO_AFTER_STORM.K! / VERANO_SOLOW.K!);
+  const currentS = overrides.s ?? defaults.s!;
+  const halfAgain = { ...overrides, s: Math.min(1, currentS * 1.5) };
+
   return (
     <>
       <main className="prose">
         <span className="eyebrow">Chapter 3</span>
         <h1>The Solow model</h1>
         <p className="lede">
-          Every economy faces one trade: consume now, or build capacity that produces later. The
-          Solow model states that trade as a single line of state and runs it forward.
+          Every economy faces the same trade, every year: consume now, or build capacity that
+          produces later. The Solow model states that trade in a single line and runs it forward.
+          Robert Solow published it in 1956, it helped win him a Nobel prize, and nearly every
+          argument about growth since has started from it.
         </p>
 
         <h2 id="accumulation">Adding one relation</h2>
         <p>
-          Chapter 2 described an economy without memory. Its capital stock held whatever value it
-          was given, permanently, because no relation could change it. This chapter adds one
-          relation. A fixed share of output becomes next period&rsquo;s capital, and a fixed share
-          of existing capital wears out each period.
+          Chapter 2 described an economy with no memory. Its capital stock held whatever value it
+          was given, permanently, because nothing could build more or wear any out. This chapter
+          adds the one relation that changes that. Each period a fixed share of output is set aside
+          and becomes new capital, and a fixed share of the existing capital wears out. Capital is
+          now a stock with a tap and a plughole, which is to say a bathtub, and Chapter 0 has
+          already shown where bathtubs settle.
         </p>
 
         <div className="equation">
@@ -116,9 +126,9 @@ export function Chapter3(): JSX.Element {
             variables={new Map(solowModel.variables.map((v) => [v.id, v]))}
           />
           <p className="equation__note">
-            Without Δt the expression adds a stock to a flow. The unit checker rejects it. That
-            rejection is the point. A quantity measured at a moment and a quantity measured per unit
-            of time are different kinds of thing, and no algebra reconciles them.
+            Leave out Δt and the expression adds a stock to a flow, which the unit checker rejects.
+            That rejection is deliberate. A quantity measured at a moment and a quantity measured
+            per unit of time are different kinds of thing, and no algebra turns one into the other.
           </p>
         </div>
 
@@ -136,16 +146,19 @@ export function Chapter3(): JSX.Element {
         />
 
         <p>
-          Investment and consumption both move at once. Output does not. Production depends on the
-          capital already in place, and no decision taken this period alters that stock. The
-          immediate effect is a change in how output is divided, not in how much of it there is.
+          Investment and consumption both move at once, and output stays exactly where it was. That
+          surprises most people, and the reason is worth holding on to. This year&rsquo;s output
+          is made with the capital already in place, and no decision taken this year can change
+          that stock until next year. So the immediate effect of saving more is a change in how
+          output is divided between consumption and investment, with the total unchanged. The
+          country eats less today and has more machines tomorrow.
         </p>
         <p>
-          Under the fixed investment rate assumed here, the division responds instantly and
-          proportionally. That rule is an assumption, not an accounting statement. Households and
-          firms choose how much to set aside, and the choice responds to interest rates,
-          demographics and expectations. The identity beneath it holds regardless. Output is either
-          consumed or invested.
+          Under the fixed investment rate assumed here, the division responds instantly and in
+          proportion. That rule is an assumption about behaviour, and a strong one. Real households
+          and firms decide how much to set aside, and those decisions move with interest rates,
+          with the age of the population and with expectations about the future. The identity
+          underneath holds regardless: output is either consumed or invested.
         </p>
 
         <ErrorBoundary label="The causal trace">
@@ -162,9 +175,9 @@ export function Chapter3(): JSX.Element {
         <p>
           {closedFormExists ? (
             <>
-              Capital climbs until construction and depreciation match exactly. That level is the{' '}
-              <em>steady state</em>: the stock at which the flows into it and out of it cancel, so
-              it stops changing. Simulation settles at{' '}
+              Capital climbs until the new capital built each year exactly replaces what wears out.
+              That level is the <em>steady state</em>: the stock at which the flows in and out
+              cancel, so it stops changing. The simulation settles at{' '}
               <Result
                 model={solowModel}
                 overrides={overrides}
@@ -172,16 +185,17 @@ export function Chapter3(): JSX.Element {
                 at={PERIODS}
                 periods={PERIODS}
               />
-              . The closed form gives{' '}
+              . Solving the equations directly gives{' '}
               <span className="mono result">
                 {steady.K.toLocaleString('en-US', { maximumFractionDigits: 2 })}
               </span>
               . The two agree to{' '}
-              {agreement === 0 ? 'the last bit' : `${agreement.toExponential(1)} relative`}.
+              {agreement === 0 ? 'the last bit' : `${agreement.toExponential(1)} relative`}, which
+              is the sort of check worth running on any model you intend to trust.
             </>
           ) : (
             <>
-              With nothing wearing out, capital never stops climbing. The closed form returns no
+              With nothing wearing out, capital never stops climbing. The equations return no
               steady state, and after {PERIODS} periods the simulation stands at{' '}
               <Result
                 model={solowModel}
@@ -193,6 +207,13 @@ export function Chapter3(): JSX.Element {
               and rising. Algebra and simulation agree that there is nothing to converge to.
             </>
           )}
+        </p>
+        <p>
+          The first chart shows why. Its curve is the new capital built each year, which bends
+          because of diminishing returns, and its straight line is the capital wearing out, which
+          rises in proportion to the stock. Where the two cross, the stock stops moving. The
+          second chart shows the same journey as a path through time, and the year slider below
+          lets you follow it.
         </p>
 
         <div className="charts">
@@ -232,31 +253,32 @@ export function Chapter3(): JSX.Element {
 
         <h2 id="saving">Why saving more does not raise output today</h2>
         <p>
-                    A higher investment rate raises the steady state. It does not raise the growth rate.
-          Capital climbs faster for a while, reaches a higher resting level, and stops. With
+          A higher investment rate raises the steady state, and leaves the long-run growth rate
+          alone. Capital climbs faster for a while, reaches a higher resting level, and stops. With
           productivity and the workforce held fixed, as they are here, long-run growth in output
-          per worker is zero at every investment rate. Whatever explains sustained growth, it is
-          not thrift.
+          per worker is zero at every investment rate. That is bad news for anyone hoping thrift
+          alone could make a country grow forever, and it is one of the most important results in
+          the book.
         </p>
         <p>
-          That result is not a fact about economies. It follows from the capital exponent being
-          below one, which is what makes each unit of capital add less than the last. Whether that exponent really is below one, once human capital and knowledge are counted
-          as capital too, is the central disagreement in growth theory. Chapter 2&rsquo;s
-          &ldquo;break it&rdquo; was a first look at the other side of it.
+          The result rests on one assumption: that the capital exponent is below one, so each unit
+          of capital adds less than the last. Whether that stays true once skills and knowledge are
+          counted as capital too is the central disagreement in growth theory. Chapter 2&rsquo;s
+          Break-it box was a first look at the other side of it.
         </p>
         <p>
-          The gain is also smaller than intuition suggests. Raising the investment rate by half
-          raises steady-state output per worker by{' '}
+          The gain is also smaller than intuition suggests. Raising the investment rate by half,
+          from wherever it stands now, raises steady-state output per worker by{' '}
           <Delta
             model={solowModel}
             from={overrides}
-            to={{ ...overrides, s: 0.3 }}
+            to={halfAgain}
             of="y"
             at={PERIODS}
             periods={PERIODS}
           />
-          . The reason is familiar. Diminishing returns bend the curve in Chapter 2, and they apply
-          to every unit of the extra capital here.
+          . The reason is familiar: the same diminishing returns that bent the curve in Chapter 2
+          apply to every unit of the extra capital here.
         </p>
 
         <div className="breakit">
@@ -264,19 +286,20 @@ export function Chapter3(): JSX.Element {
           <p>
             Set the depreciation rate to zero. Nothing wears out, so the steady state disappears,
             and the loop gain crosses one into <em>amplifying</em>. The convergence check and the
-            loop analysis reach that conclusion independently, by different routes.
+            loop analysis reach that conclusion independently, by different routes, which is
+            reassuring.
           </p>
-                      <p>
-              Capital never stops climbing, though it does slow: it grows roughly as the three-halves
-              power of time, and the growth rate of output per worker still falls toward zero. What
-              has gone is the resting point, not the diminishing returns.
-            </p>
-            <p>
-              The model has nothing to say about whether an economy could sustain this. It contains
-              no resource limit, no population growth, and no price that would rise as capital
-              became abundant. Its own arithmetic never settles. That is a fact about the model, and
-              not about any economy.
-            </p>
+          <p>
+            Capital never stops climbing, though it does slow down. It grows roughly with time
+            raised to the power three halves, and the growth rate of output per worker still falls
+            toward zero. The resting point has gone, and the diminishing returns are still there.
+          </p>
+          <p>
+            The model has nothing to say about whether an economy could sustain this. It contains
+            no resource limit, no population growth, and no price that would rise as capital became
+            abundant. Its own arithmetic simply never settles, and that is a fact about the model
+            rather than about any economy.
+          </p>
           <button type="button" onClick={() => set('d', 0)}>
             set <MathText latex="\bar{d}" /> = 0
           </button>
@@ -290,12 +313,14 @@ export function Chapter3(): JSX.Element {
           part={4}
           title="The National Investment Plan"
           anchor="case"
-          question="Verano proposes to raise its investment rate from 18 percent to 28 percent, permanently. What does the country get, and when?"
+          question={`Verano proposes to raise its investment rate from ${pct(VERANO_SOLOW.s!)} percent to ${pct(VERANO_PLAN_RATE)} percent, permanently. What does the country get, and when?`}
         >
           <p>
-            The plan is the reason for the briefing note in Part One and the argument over the
-            accounts in Part Two. It commits Verano to setting aside ten more points of output every
-            year, indefinitely. Consumption falls the day it starts.
+            This is the plan behind the briefing note in Part One and the argument over the
+            accounts in Part Two. It commits Verano to setting aside{' '}
+            <span className="mono result">{planPoints}</span> more points of output every year,
+            indefinitely. Consumption falls the day it starts, which the Ministry&rsquo;s
+            presentation mentions on page forty.
           </p>
 
           <CaseFigures
@@ -312,10 +337,10 @@ export function Chapter3(): JSX.Element {
           />
 
           <p>
-            Verano currently rests nowhere. Its capital stock is far below where its own investment
-            rate would eventually take it, so output is growing before the plan changes anything.
-            That matters for judging the plan, because some of what its supporters attribute to it
-            was going to happen regardless.
+            One thing to notice first: Verano is not at rest. Its capital stock is well below where
+            its current investment rate would eventually take it, so output is already growing
+            before the plan changes anything. That matters for judging the plan, because some of the
+            growth its supporters will credit to it was going to happen anyway.
           </p>
 
           <Predict
@@ -333,8 +358,9 @@ export function Chapter3(): JSX.Element {
 
           <CaseAnswer>
             <p>
-              Output does not move for a year. Consumption falls immediately, by the full ten points
-              of output the plan diverts. The country pays first and is paid back slowly.
+              Output does not move for a year. Consumption falls immediately, by the full{' '}
+              <span className="mono result">{planPoints}</span> points of output the plan diverts.
+              The country pays first and is paid back slowly.
             </p>
             <p>Where the plan eventually takes Verano, against where it was already going:</p>
             <CaseFigures
@@ -362,46 +388,51 @@ export function Chapter3(): JSX.Element {
               ]}
             />
             <p>
-                            The half-life below is the model&rsquo;s, and the model converges faster than
-              economies do. Convergence here runs at one minus the capital exponent times the
-              depreciation rate; the rate measured across countries is closer to two percent a
-              year, with a half-life nearer thirty-five years. A finance minister handed this
-              timeline should be told it is optimistic, and why.
-            </p>
-            <p>
-              The plan raises output per worker in the long run by about{' '}
-              <span className="mono result">{(planGain * 100).toFixed(1)}%</span>, and reaches half
-              of that gain around year{' '}
-              <span className="mono result">{yearsToHalf}</span>. Long-run growth is unchanged at
-              zero, because a higher investment rate moves the resting point and not the trend. A
+              In the long run the plan raises output per worker by about{' '}
+              <span className="mono result">{(planGain * 100).toFixed(1)}%</span>, and it delivers
+              half of that gain around year{' '}
+              <span className="mono result">{yearsToHalf}</span>. Long-run growth stays at zero,
+              because a higher investment rate moves the resting point and leaves the trend alone. A
               minister who promises the plan will make Verano grow faster forever is promising
-              something this model says is impossible, whatever else it gets wrong.
+              something this model says cannot happen, whatever else the model gets wrong.
             </p>
             <p>
-                            Consumption per worker is higher in the end. That was not guaranteed. Steady-state consumption is highest when the investment rate equals the capital
-              exponent. That is one third here, the same one third that bent the curve in Chapter 2.
-              Verano sits below it, so the plan moves toward that rate rather than past it.
+              Treat that timeline as optimistic. In this model the speed of convergence is set by
+              the depreciation rate and the capital exponent, and for Verano it comes out at about{' '}
+              <span className="mono result">
+                {((1 - 1 / 3) * VERANO_SOLOW.d! * 100).toFixed(0)}%
+              </span>{' '}
+              of the remaining gap each year. Studies across real countries measure something
+              closer to two percent, a half-life of about thirty-five years. A finance minister
+              handed the model&rsquo;s timeline should be told it is the best case, and why.
             </p>
             <p>
-              The two directions are not symmetric. A country investing more than the capital
+              Consumption per worker ends up higher, and that was not guaranteed. Steady-state
+              consumption is highest when the investment rate equals the capital exponent, which is
+              one third here, the same one third that bent the curve in Chapter 2. Verano starts
+              below that rate, so the plan moves it toward the best rate rather than past it.
+            </p>
+            <p>
+              The two directions are not symmetric. A country that invests more than the capital
               exponent is <em>dynamically inefficient</em>: cutting its investment rate would raise
-              consumption in every period, with no one worse off at any date. Below that rate there
-              is no such free move. Raising investment always costs the present generation to
-              benefit a later one, which is a question about who counts rather than about
-              arithmetic.
+              consumption in every period, with nobody worse off at any date. Below that rate there
+              is no such free lunch. Raising investment always costs the present generation
+              something to benefit a later one, and how to weigh the two is a question about whom
+              you care about, which no arithmetic can answer.
             </p>
             <p>
-                            Of the three assumptions in the briefing note, only one is load-bearing here. The
-              fixed investment rate drives everything above. The wage assumption changes who
-              receives the output, not how much of it there is — the causal trace shows the wage as
-              a leaf that nothing else depends on. And the claim that firms invest more when the
-              return on capital is higher is not in this model at all: nothing here lets the return
-              on capital feed back into investment.
+              Now back to the briefing note in Part One. Of its three assumptions, only one carries
+              any weight here. The fixed investment rate drives everything above. The wage
+              assumption changes who receives the output, but not how much of it there is: the
+              causal trace shows the wage as a leaf that nothing else depends on. And the claim that
+              firms invest more when the return on capital is higher does not appear in this model
+              at all, because nothing here lets the return on capital feed back into investment.
             </p>
             <p>
-              That third gap is the plan&rsquo;s largest unquantified risk. Verano is being advised
-              to double down on capital by a model with no channel through which the falling return
-              on that capital could discourage anyone from supplying it.
+              That third gap is the plan&rsquo;s largest unmeasured risk. Verano is being advised
+              to double down on capital by a model in which the falling return on that capital
+              cannot discourage anyone from supplying it. In a real economy it would, and the plan
+              would have to be enforced against the very incentive it is creating.
             </p>
           </CaseAnswer>
         </CaseFile>
@@ -409,11 +440,11 @@ export function Chapter3(): JSX.Element {
         <CaseFile
           part={5}
           title="The storm"
-          question="A hurricane destroys two fifths of Verano's capital stock overnight. How long until the country is back where it started?"
+          question={`A hurricane destroys ${stormLoss} percent of Verano's capital stock overnight. How long until the country is back where it started?`}
         >
           <p>
-            Nothing else changes: the same people, the same skills, the same institutions, the same
-            investment rate. Only the capital is gone.
+            Nothing else changes: the same people, the same skills, the same institutions and the
+            same investment rate. Only the capital is gone.
           </p>
           <CaseFigures
             model={solowModel}
@@ -428,15 +459,16 @@ export function Chapter3(): JSX.Element {
           />
           <CaseAnswer>
             <p>
-                            Capital returns to its pre-storm level in about{' '}
+              Capital returns to its pre-storm level in about{' '}
               <span className="mono result">{yearsToRecover}</span> years, and the recovery is
-              fastest at the start. The reason is not that investment rises. Investment is a fixed share of output, and output
-              has fallen. It is that the same investment is a larger fraction of a smaller capital
-              stock, so the stock grows at a faster rate from further down.
+              fastest at the start. Investment does not rise to make that happen. It is a fixed
+              share of output, and output has fallen. What changes is that the same investment is
+              now a larger fraction of a smaller capital stock, so the stock grows at a faster rate
+              from further down.
             </p>
             <p>
-              Output falls by much less than capital does. Losing two fifths of the capital stock
-              costs Verano{' '}
+              Output falls by much less than capital does. Losing{' '}
+              <span className="mono result">{stormLoss}%</span> of the capital stock costs Verano{' '}
               <Delta
                 model={solowModel}
                 from={VERANO_SOLOW}
@@ -450,10 +482,10 @@ export function Chapter3(): JSX.Element {
               hurricane survivable here.
             </p>
             <p>
-              The model has nothing to say about the people the storm killed, the housing it
-              destroyed, or whether the rebuilt capital is the same capital. It describes one
-              quantity and recovers it. Reading that as a claim that hurricanes do not matter would
-              be a misuse of it.
+              The model has nothing to say about the people the storm killed, the homes it
+              destroyed, or whether the rebuilt capital is as good as what it replaced. It tracks
+              one quantity and recovers it. Reading that as a claim that hurricanes do not matter
+              would be a misuse of the model.
             </p>
           </CaseAnswer>
         </CaseFile>
